@@ -1,2 +1,2 @@
-# python-project-template
-Template repository for a Python project.
+# Parcel B Beetle Quest
+A Parcel B & Design Nauture inspired game written in Python.
