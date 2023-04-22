@@ -15,6 +15,7 @@ GLOBAL_WINDOW_HEIGHT = 500
 
 MAP_SCENES_FILEPATH = "data/scene_data/map.json"
 MAP_BACKGROUND_FILEPATH = "data/scene_data/map1.png"
+EVENT_SCENES_FILEPATH = ""
 
 FONT_FILEPATH = "data/fonts/pixel.ttf"
 SMALL_FONT_SIZE = 20
@@ -130,7 +131,61 @@ class MapScene(Scene):
 
 
 class EventScene(Scene):
-    pass
+    def __init__(self, surface):
+        """ """
+        super().__init__(surface)
+        self._surface = surface
+
+        # Load event scene data
+        with open(EVENT_SCENES_FILEPATH, "r", encoding="utf-8") as datafile:
+            self._scene_data = load(datafile)
+
+    def draw(self, event_id):
+        # Load data for current even
+        event_scene = self._scene_data[event_id]
+
+        # Load event background image
+        self._event_background = pygame.image.load(
+            event_scene["BackgroundImage"]
+        )
+
+        # Load event character image
+        self._event_character = pygame.image.load(event_scene["PromptImage"])
+
+        # Draw background
+        self._surface.blit(self._event_background, (0, 0))
+
+        # Draw character
+        self._surface.blit(
+            self._event_character,
+            (3 * GLOBAL_WINDOW_WIDTH / 4, GLOBAL_WINDOW_HEIGHT / 2),
+        )
+
+        # Draw text prompt onto surface
+        prompt = self._pixel_font_small.render(
+            event_scene["TextPrompt"], True, self._white
+        )
+        self._surface.blit(prompt, (250, 100))
+
+        # Determine event options prompts
+        option_one = event_scene["O1Text"]
+        option_two = event_scene["O2Text"]
+
+        # Draw event options onto surface
+        option_text = self._pixel_font_small.render(
+            f"{option_one} or {option_two}", True, self._white
+        )
+        self._surface.blit(option_text, (250, 300))
+
+        # Draw character sprite
+        player_sprite = PlayerSprite(self._player)
+        self._surface.blit(
+            player_sprite.image,
+            (
+                600,  # (width_center - (player_sprite.width / 2)),
+                1000,  # (height_center - (player_sprite.height / 2)),
+            ),
+        )
 
 
 class PlayerSprite(pygame.sprite.Sprite):
