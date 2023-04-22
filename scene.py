@@ -107,29 +107,22 @@ class MapScene(Scene):
         )
 
         # Draw current player health
-        health_text = self._pixel_font_small.render(
-            f"Health: {self._player.health}", True, self._white
+        display_health(
+            self._surface,
+            self._pixel_font_small,
+            self._player.health,
+            SIDE_EDGE_OFFSET,
+            HEALTH_HEIGHT,
         )
-        self._surface.blit(health_text, (SIDE_EDGE_OFFSET, HEALTH_HEIGHT))
 
         # Draw current player inventory
-        inventory_title_text = self._pixel_font_small.render(
-            "Inventory:", True, self._white
+        display_inventory(
+            self._surface,
+            self._pixel_font_small,
+            self._player.inventory,
+            SIDE_EDGE_OFFSET,
+            INVENTORY_HEIGHT,
         )
-        self._surface.blit(
-            inventory_title_text, (SIDE_EDGE_OFFSET, INVENTORY_HEIGHT)
-        )
-        for index, item in enumerate(self._player.inventory):
-            inventory_item_text = self._pixel_font_small.render(
-                item, True, self._white
-            )
-            self._surface.blit(
-                inventory_item_text,
-                (
-                    SIDE_EDGE_OFFSET,  # x cords
-                    (INVENTORY_HEIGHT + (LINE_OFFSET * (index + 1))),  # y cords
-                ),
-            )
 
         # Draw character sprite
         player_sprite = PlayerSprite(self._player)
@@ -352,3 +345,50 @@ def draw_background(
 
     # Return the map offsets
     return (width_difference, height_difference)
+
+
+def display_health(surface, font, health, width, height):
+    """
+    Display the player's current health at a given location on the screen
+
+    Args:
+        surface: pygame surface to draw on
+        health: integer representing the player's current health
+        font: pygame font to print using
+        width_start: integer representing the width pixel location where the
+            text is printed
+        height_start: integer representing the height pixel location where the
+            text is printed
+    """
+    # Print health in white text
+    color = (255, 255, 255)
+    health_text = font.render(f"Health: {health}", True, color)
+    surface.blit(health_text, (width, height))
+
+
+def display_inventory(surface, font, inventory, width, height):
+    """
+    Display the player's current inventory at a given location on the screen.
+
+    Args:
+        surface: pygame surface to draw on
+        inventory: list of strings representing the player's current inventory
+        font: pygame font to print using
+        width_start: integer representing the width pixel location where the
+            text is printed
+        height_start: integer representing the height pixel location where the
+            text is printed
+    """
+    # Print in white font
+    color = (255, 255, 255)
+    inventory_title_text = font.render("Inventory:", True, color)
+    surface.blit(inventory_title_text, (SIDE_EDGE_OFFSET, INVENTORY_HEIGHT))
+    for index, item in enumerate(inventory):
+        inventory_item_text = font.render(item, True, color)
+        surface.blit(
+            inventory_item_text,
+            (
+                width,  # x cords
+                (height + (LINE_OFFSET * (index + 1))),  # y cords
+            ),
+        )
