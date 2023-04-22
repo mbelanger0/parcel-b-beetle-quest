@@ -28,7 +28,7 @@ player = PlayerCharacter(PLAYER_SPRITE_FILEPATH)
 player.update_inventory("coat")
 player.update_inventory("shtuff")
 
-map = MapScene(displaysurface, player)
+map = EventScene(displaysurface, player)  # MapScene(displaysurface, player)
 map.draw(0)
 
 while True:

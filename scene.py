@@ -15,7 +15,7 @@ GLOBAL_WINDOW_HEIGHT = 500
 
 MAP_SCENES_FILEPATH = "data/scene_data/map.json"
 MAP_BACKGROUND_FILEPATH = "data/scene_data/map1.png"
-EVENT_SCENES_FILEPATH = ""
+EVENT_SCENES_FILEPATH = "data/event_data/events.json"
 
 FONT_FILEPATH = "data/fonts/pixel.ttf"
 SMALL_FONT_SIZE = 20
@@ -195,10 +195,11 @@ class MapScene(Scene):
 
 
 class EventScene(Scene):
-    def __init__(self, surface):
+    def __init__(self, surface, player):
         """ """
         super().__init__(surface)
         self._surface = surface
+        self._player = player
 
         # Load event scene data
         with open(EVENT_SCENES_FILEPATH, "r", encoding="utf-8") as datafile:
@@ -229,7 +230,7 @@ class EventScene(Scene):
         prompt = self._pixel_font_small.render(
             event_scene["TextPrompt"], True, self._white
         )
-        self._surface.blit(prompt, (250, 100))
+        self._surface.blit(prompt, (250, 75))
 
         # Determine event options prompts
         option_one = event_scene["O1Text"]
@@ -239,16 +240,34 @@ class EventScene(Scene):
         option_text = self._pixel_font_small.render(
             f"{option_one} or {option_two}", True, self._white
         )
-        self._surface.blit(option_text, (250, 300))
+        options_text_rect = option_text.get_rect(
+            center=(GLOBAL_WINDOW_WIDTH / 2, 8 * GLOBAL_WINDOW_HEIGHT / 9)
+        )
+        self._surface.blit(option_text, options_text_rect)
 
         # Draw character sprite
         player_sprite = PlayerSprite(self._player)
-        self._surface.blit(
-            player_sprite.image,
-            (
-                600,  # (width_center - (player_sprite.width / 2)),
-                1000,  # (height_center - (player_sprite.height / 2)),
-            ),
+        player_sprite_rect = player_sprite.image.get_rect(
+            center=(GLOBAL_WINDOW_WIDTH / 2, GLOBAL_WINDOW_HEIGHT / 2)
+        )
+        self._surface.blit(player_sprite.image, player_sprite_rect)
+
+        # Draw current player health
+        display_health(
+            self._surface,
+            self._pixel_font_small,
+            self._player.health,
+            SIDE_EDGE_OFFSET,
+            HEALTH_HEIGHT,
+        )
+
+        # Draw current player inventory
+        display_inventory(
+            self._surface,
+            self._pixel_font_small,
+            self._player.inventory,
+            SIDE_EDGE_OFFSET,
+            INVENTORY_HEIGHT,
         )
 
 
