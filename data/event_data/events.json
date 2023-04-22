@@ -1,0 +1,10 @@
+[
+    {
+        "ID": 0,
+        "TextPrompt": "A bee is attacking you",
+        "PromptImage": "/data/event_data/bee_sprite.png",
+        "BackgroundImage": "/data/event_data/Olin_College.jpg",
+        "O1Text": "Run",
+        "O2Text": "Swat"
+    }
+]
