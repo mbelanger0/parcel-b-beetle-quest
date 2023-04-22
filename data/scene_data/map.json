@@ -1,0 +1,18 @@
+[
+ {
+  "ID": 0,
+  "Name": "asdasd",
+  "MapPointCenterHeight": 600,
+  "MapPointCenterWidth": 1000,
+  "SpecialEvent": "None",
+  "DirectionsToMove": "(1,None,1,None)"
+ },
+ {
+  "ID": 1,
+  "Name": "dsafgfb",
+  "MapPointCenterHeight": 234,
+  "MapPointCenterWidth": 123,
+  "SpecialEvent": 1,
+  "DirectionsToMove": "(1,None, None, None)"
+ }
+]

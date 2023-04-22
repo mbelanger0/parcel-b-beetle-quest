@@ -129,3 +129,6 @@ dmypy.json
 .pyre/
 
 .vscode/
+
+# Remove weird windows metadata about files
+*:Zone.*

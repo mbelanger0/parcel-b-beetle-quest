@@ -33,10 +33,10 @@ class PlayerCharacter(Character):
     Docstring
     """
 
-    def __init__(self, sprite_path, location):
+    def __init__(self, sprite_path):
         super().__init__(sprite_path)
-        self._location = location
-        self._health = 100 # can be changed later
+        self._sprite_path = sprite_path
+        self._health = 100  # can be changed later
 
     @property
     def health(self):
@@ -44,6 +44,13 @@ class PlayerCharacter(Character):
         Docstring
         """
         return self._health
+
+    @property
+    def filepath(self):
+        """
+        Docstring
+        """
+        return self._sprite_path
 
     def update_health(self, damage):
         """
