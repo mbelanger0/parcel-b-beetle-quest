@@ -5,10 +5,10 @@ Code to render each type of scene in the game.
 from json import load
 from abc import ABC, abstractmethod
 from PIL import Image
+from ast import literal_eval
 
 import pygame
 from pygame.locals import *
-import pygame_gui
 
 GLOBAL_WINDOW_WIDTH = 800
 GLOBAL_WINDOW_HEIGHT = 500
@@ -20,6 +20,18 @@ EVENT_SCENES_FILEPATH = ""
 FONT_FILEPATH = "data/fonts/pixel.ttf"
 SMALL_FONT_SIZE = 20
 LARGE_FONT_SIZE = 48
+
+# Constants related to positioning text within the window
+SIDE_EDGE_OFFSET = 10
+LINE_OFFSET = 30
+BOTTOM_EDGE_OFFSET = 25
+
+HEALTH_HEIGHT = 10
+INVENTORY_HEIGHT = HEALTH_HEIGHT + (LINE_OFFSET * 2)
+
+
+# Constants related to printing directions
+DIRECTION_KEY = ["Left ->", "Right ->", "Up ^", "Down V"]
 
 
 class Scene(ABC):
@@ -51,11 +63,12 @@ class Scene(ABC):
 class MapScene(Scene):
     def __init__(self, surface, player) -> None:
         """
-        Load general data for all map scenes, player character in order to
-        display, and the pygame surface to draw on.
+        Draw a map scene, including displaying the background correctly and
+        displaying the character sprite/character health information.
 
         Args:
-            player: PlayerCharacter object to be later drawn on the screen.
+            surface: pygame Surface object on which to draw
+            player: PlayerCharacter object to be drawn onto the surface
         """
         super().__init__(surface)
 
@@ -77,57 +90,115 @@ class MapScene(Scene):
         Display the scene of the specified ID in the Pygame window.
 
         Args:
-            scene_id: integer ID of the scene to be loaded.
+            scene_id: integer ID of the scene to be loaded from the map scene
+                data file.
         """
         # Load data for the current map point to be displayed
         current_scene = self._scene_data[scene_id]
 
-        # Calculate where to center the map around the current point
-        width_center = current_scene["MapPointCenterWidth"]
-        height_center = current_scene["MapPointCenterHeight"]
-
-        map_width_corner = width_center - (GLOBAL_WINDOW_WIDTH / 2)
-        map_height_corner = height_center - (GLOBAL_WINDOW_WIDTH / 2)
-
-        # Make sure the point is not going to be too close to the edge of the
-        # map such that part of the map will get cut off. If too close to edge,
-        # move so the point is not centered.
-        if (map_width_corner + GLOBAL_WINDOW_WIDTH) > self._map_width:
-            width_difference = (
-                map_width_corner + GLOBAL_WINDOW_WIDTH - self._map_width
-            )
-
-            map_width_corner -= width_difference
-            width_center += width_difference
-
-        if (map_height_corner + GLOBAL_WINDOW_HEIGHT) > self._map_height:
-            height_difference = (
-                map_height_corner + GLOBAL_WINDOW_HEIGHT - self._map_height
-            )
-
-            map_height_corner -= height_difference
-            height_center += height_difference
-
-        # Actually draw the background
-        self._surface.blit(
-            self._map_background, (-map_width_corner, -map_height_corner)
+        # Draw background with helper function
+        (width_difference, height_difference) = draw_background(
+            self._surface,
+            self._map_background,
+            self._map_width,
+            self._map_height,
+            current_scene["MapPointCenterWidth"],
+            current_scene["MapPointCenterHeight"],
         )
 
         # Draw current player health
         health_text = self._pixel_font_small.render(
             f"Health: {self._player.health}", True, self._white
         )
-        self._surface.blit(health_text, (10, 10))
+        self._surface.blit(health_text, (SIDE_EDGE_OFFSET, HEALTH_HEIGHT))
+
+        # Draw current player inventory
+        inventory_title_text = self._pixel_font_small.render(
+            "Inventory:", True, self._white
+        )
+        self._surface.blit(
+            inventory_title_text, (SIDE_EDGE_OFFSET, INVENTORY_HEIGHT)
+        )
+        for index, item in enumerate(self._player.inventory):
+            inventory_item_text = self._pixel_font_small.render(
+                item, True, self._white
+            )
+            self._surface.blit(
+                inventory_item_text,
+                (
+                    SIDE_EDGE_OFFSET,  # x cords
+                    (INVENTORY_HEIGHT + (LINE_OFFSET * (index + 1))),  # y cords
+                ),
+            )
 
         # Draw character sprite
         player_sprite = PlayerSprite(self._player)
         self._surface.blit(
             player_sprite.image,
             (
-                600,  # (width_center - (player_sprite.width / 2)),
-                1000,  # (height_center - (player_sprite.height / 2)),
+                (
+                    # The character is drawn in the center of the screen,
+                    # while accounting for the size of the sprite itself and
+                    # if the window has been shifted due to being too close
+                    # to the edge of the map.
+                    (GLOBAL_WINDOW_WIDTH / 2)
+                    - (player_sprite.width / 2)
+                    + width_difference
+                ),
+                (
+                    (GLOBAL_WINDOW_HEIGHT / 2)
+                    - (player_sprite.height / 2)
+                    + height_difference
+                ),
             ),
         )
+
+        # Draw next move options
+        next_moves = literal_eval(current_scene["DirectionsToMove"])
+        directions = 0
+        for index, value in enumerate(next_moves):
+            if value is not None:
+                next_move_text = self._pixel_font_small.render(
+                    DIRECTION_KEY[index], True, self._white
+                )
+                self._surface.blit(
+                    next_move_text,
+                    (
+                        SIDE_EDGE_OFFSET,
+                        (
+                            GLOBAL_WINDOW_HEIGHT
+                            - ((directions * LINE_OFFSET) + BOTTOM_EDGE_OFFSET)
+                        ),
+                    ),
+                )
+                directions += 1
+
+        # Render instruction text
+        move_directions = self._pixel_font_small.render(
+            "Choose a direction to go: ", True, self._white
+        )
+        self._surface.blit(
+            move_directions,
+            (
+                SIDE_EDGE_OFFSET,  # x coords
+                GLOBAL_WINDOW_HEIGHT  # y coords - from bottom edge
+                - (directions * LINE_OFFSET)  # offset based on # of directions
+                - BOTTOM_EDGE_OFFSET,  # standard bottom offset
+            ),
+        )
+
+    def move_to_point(self, old_id, new_id, direction):
+        """
+        Animate movement from one point to another on the map.
+
+        Valid directions of travel are: LEFT, RIGHT, UP, DOWN
+
+        Args:
+            old_id: integer id of current map point location
+            new_id: integer id of new map point location
+            direction: string representing direction of travel
+        """
+        pass
 
 
 class EventScene(Scene):
@@ -227,3 +298,57 @@ class PlayerSprite(pygame.sprite.Sprite):
         Return the pygame image object representing the Sprite
         """
         return self._image
+
+
+def draw_background(
+    surface, background, image_width, image_height, width_center, height_center
+):
+    """
+    Draw a background image onto a pygame surface centered around
+    specific coordinates of an image.
+
+    If the coordinates are too close to the edge of the image (ie, the image
+    won't cover the entire screen if drawn with the given points centered), the
+    image is drawn offset and the distance the image had to be drawn offset is
+    returned.
+
+    Args:
+        surface: pygame surface on which to draw
+        background: pygame image object to be drawn as the background
+        image_width: integer representing image width in pixels
+        image_height: integer representing image height in pixels
+        width_center: integer representing pixel coordinates of image which to
+            center in the window (width of image)
+        height_center: integer representing pixel coordinates of image which to
+            center in the window (height of image)
+
+    Returns:
+        A tuple of two integers representing the width and height shift to make
+            the image fill the entire screen.
+    """
+
+    # Calculate where to center the map around the current point
+    width_difference = 0
+    height_difference = 0
+
+    map_width_corner = width_center - (GLOBAL_WINDOW_WIDTH / 2)
+    map_height_corner = height_center - (GLOBAL_WINDOW_WIDTH / 2)
+
+    # Make sure the point is not going to be too close to the edge of the
+    # map such that part of the map will get cut off. If too close to edge,
+    # move so the point is not centered.
+    if (map_width_corner + GLOBAL_WINDOW_WIDTH) > image_width:
+        width_difference = map_width_corner + GLOBAL_WINDOW_WIDTH - image_width
+        map_width_corner -= width_difference
+
+    if (map_height_corner + GLOBAL_WINDOW_HEIGHT) > image_height:
+        height_difference = (
+            map_height_corner + GLOBAL_WINDOW_HEIGHT - image_height
+        )
+        map_height_corner -= height_difference
+
+    # Actually draw the background
+    surface.blit(background, (-map_width_corner, -map_height_corner))
+
+    # Return the map offsets
+    return (width_difference, height_difference)

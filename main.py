@@ -16,7 +16,7 @@ WIDTH = 800
 FPS = 60
 
 # Define constant filepaths in relation to project directory
-PLAYER_SPRITE_FILEPATH = "data/sprite_data/olin.png"
+PLAYER_SPRITE_FILEPATH = "data/sprite_data/resting.png"
 
 # Setup pygame clock
 FramePerSec = pygame.time.Clock()
@@ -25,6 +25,8 @@ FramePerSec = pygame.time.Clock()
 displaysurface = pygame.display.set_mode((WIDTH, HEIGHT))
 displaysurface.fill((0, 0, 0))
 player = PlayerCharacter(PLAYER_SPRITE_FILEPATH)
+player.update_inventory("coat")
+player.update_inventory("shtuff")
 
 map = MapScene(displaysurface, player)
 map.draw(0)

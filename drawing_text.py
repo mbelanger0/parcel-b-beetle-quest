@@ -14,7 +14,7 @@ def display_travel_directions(next_directions, surface, width, height):
     each decision point in the came
 
     Args:
-        next_direction: tuple of integers or None
+        next_direction: tuple of four integers or None
         surface: pygame surface that the game is being displayed on
     """
 
