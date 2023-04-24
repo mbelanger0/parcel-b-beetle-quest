@@ -77,6 +77,9 @@ class MapScene(Scene):
             self._scene_data = load(datafile)
 
         # Load the map scene background image
+        #
+        # Additionally, store the size of the image to later ensure that the
+        # screen does not display beyond the edge of the map
         self._map_background = pygame.image.load(MAP_BACKGROUND_FILEPATH)
         self._map_width, self._map_height = Image.open(
             MAP_BACKGROUND_FILEPATH
@@ -147,16 +150,35 @@ class MapScene(Scene):
         )
 
         # Draw next move options
+        #
+        # Given a tuple from the scene data in the format
+        # (left, right, up, down), where each index is either None (representing
+        # that the player can not move that direction) or an integer
+        # (representing the player CAN move that direction, and the new scene_id
+        # that direction would correspond to), print the options the player
+        # has for movement.
+        #
+        # When imported from the JSON data, the tuple gets stored as a string,
+        # and the following line converts it back to a tuple.
         next_moves = literal_eval(current_scene["DirectionsToMove"])
+        # Keep track of the number of directions for the purpose of positioning
+        # new lines of text
         directions = 0
         for index, value in enumerate(next_moves):
+            # If the value is not None - the player can move that direction, so
+            # print the direction corresponding to that index in the tuple
+            # (left, right, up, down)
             if value is not None:
+                # Render the corresponding text and display it on the surface
                 next_move_text = self._pixel_font_small.render(
                     DIRECTION_KEY[index], True, self._white
                 )
                 self._surface.blit(
                     next_move_text,
                     (
+                        # Print the standard distance from the edge and move
+                        # line-by-line up from the bottom left corner of the
+                        # screen.
                         SIDE_EDGE_OFFSET,
                         (
                             GLOBAL_WINDOW_HEIGHT
@@ -166,7 +188,8 @@ class MapScene(Scene):
                 )
                 directions += 1
 
-        # Render instruction text
+        # Render instruction text for directions based on the number of lines
+        # already printed (the number of directions the player can move)
         move_directions = self._pixel_font_small.render(
             "Choose a direction to go: ", True, self._white
         )
