@@ -46,51 +46,49 @@ class TextController(Controller):
     Docstring
     """
 
-    def get_next_move(self, options):
+    def __init__(self, event_data):
         """
-        Determined what key is pressed down so that the next move
-        in the game can be determined
+        Opens the data file of the data for the events that can happen during game play
 
         args:
-            options: list of strings representing all of the possible options
-            of keys that can be pressed down at a certain location in the game
+            event_data: string representing file path to the event data
+        """
+        with open(event_data, "r", encoding="utf-8") as datafile:
+            self._event_data = load(datafile)
+
+    def get_next_move(self):
+        """
+        Determined what key is pressed down at a moment in the game
 
         returns:
-            string representing the key that is pressed
+            pygame key object representing the current key that is being pressed down
         """
         for event in pygame.event.get():
-            if event.type == pygame.KEYDOWN and event.key in options:
-                for key in options:
-                    if key == event.key:
-                        return key
+            if event.type == pygame.KEYDOWN:
+                return event.key
 
-    def find_travel_directions(self, next_direction):
+    def find_result_map(self, next_direction):
         """
         Determines what direction the player can move at each decision
         point on the map
 
         Args:
             next_direction: tuple of integers or None
-            surface: pygame surface that the game is being displayed on
-            width: integer representing the width in pixels of the pygame surface
-            height: integer representing the height in pixels of the pygame surface
 
         Return:
-            String telling the possible directions that the player can go
+            integer representing the map ID to progress to
         """
-        next_direction[0] = pygame.K_LEFT
-        next_direction[1] = pygame.K_RIGHT
-        next_direction[2] = pygame.K_UP
-        next_direction[3] = pygame.K_DOWN
-        directions = []
+        decision = self.get_next_move(next_direction)
+        if decision == pygame.K_LEFT and next_direction[0] != None:
+            return next_direction[0]
+        if decision == pygame.K_RIGHT and next_direction[1] != None:
+            return next_direction[1]
+        if decision == pygame.K_UP and next_direction[2] != None:
+            return next_direction[2]
+        if decision == pygame.K_DOWN and next_direction[3] != None:
+            return next_direction[3]
 
-        # Determining what directions are possible at a point
-        for direction, index in enumerate(next_direction):
-            if next_direction[index] != None:
-                directions.append(key_conversion[direction])
-        return "or".join(directions)
-
-    def find_result_event(self, event_id, event_data):
+    def find_result_event(self, event_id):
         """
         Determines the resultant of a players decision after an event
 
@@ -103,10 +101,7 @@ class TextController(Controller):
             integer representing the new event ID for the game to progress to
         """
         moves = [pygame.K_0, pygame.K_1]
-        with open(event_data, "r", encoding="utf-8") as datafile:
-            self._event_data = load(datafile)
         current_event = self._event_data[event_id]
-
         decision = self.get_next_move(moves)
         if decision == pygame.K_0:
             return current_event["O1ResultEventID"]
