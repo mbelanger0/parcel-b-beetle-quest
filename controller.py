@@ -94,16 +94,30 @@ class TextController(Controller):
 
         Args:
             event_id: integer representing the current event that the game is at
-            event_data: string representing file path to the data of the
-            possible events
 
         Returns:
-            integer representing the new event ID for the game to progress to
+            integer representing the new event ID for the game to move to
+            integer representing character health change
+            string representing item to be toggled from character inventory
+            string representing a game outcome message
+            tuple (string, int) with inventory modifier information
         """
         moves = [pygame.K_0, pygame.K_1]
         current_event = self._event_data[event_id]
         decision = self.get_next_move(moves)
         if decision == pygame.K_0:
-            return current_event["O1ResultEventID"]
+            return (
+                current_event["O1ResultEventID"],
+                current_event["O1HealthChange"],
+                current_event["O1AddInventory"],
+                current_event["O1GameEnd"],
+                current_event["ItemCheck"],
+            )
         if decision == pygame.K_1:
-            return current_event["O2ResultEventID"]
+            return (
+                current_event["O2ResultEventID"],
+                current_event["O2HealthChange"],
+                current_event["O2AddInventory"],
+                current_event["O2GameEnd"],
+                current_event["ItemCheck"],
+            )

@@ -33,6 +33,9 @@ INVENTORY_HEIGHT = HEALTH_HEIGHT + (LINE_OFFSET * 2)
 # Constants related to printing directions
 DIRECTION_KEY = ["Left ->", "Right ->", "Up ^", "Down V"]
 
+# Constant prints
+DEFAULT_DEATH_MESSAGE = "Your health has reached zero."
+
 
 class Scene(ABC):
     def __init__(self, surface) -> None:
@@ -51,6 +54,7 @@ class Scene(ABC):
 
         # Define font text colors
         self._white = (255, 255, 255)
+        self._red = (255, 0, 0)
 
     @abstractmethod
     def draw(self, scene_id):
@@ -87,6 +91,16 @@ class MapScene(Scene):
 
         # Load the player character for later reference
         self._player = player
+
+    @property
+    def scene_data(self):
+        """
+        Return the scene data loaded from the external file.
+
+        Returns:
+            Dictionary with string keys and string/integer values
+        """
+        return self._scene_data
 
     def draw(self, scene_id):
         """
@@ -292,6 +306,39 @@ class EventScene(Scene):
             SIDE_EDGE_OFFSET,
             INVENTORY_HEIGHT,
         )
+
+    @property
+    def scene_data(self):
+        """
+        Return the scene data loaded from the external file.
+
+        Returns:
+            Dictionary with string keys and string/integer values
+        """
+        return self._scene_data
+
+    def draw_death_scene(self, death_message=DEFAULT_DEATH_MESSAGE):
+        """
+        Draw a scene telling the character they have died, and if applicable,
+        the specific death message associated with their choice.
+
+        Args:
+            death_message: string representing the death message to be printed.
+                Defaults to a message that you're out of health.
+        """
+        # TODO: deal with multiline text here
+        self._surface.fill((0, 0, 0))
+
+        death_text = self._pixel_font_small.render(
+            death_message, True, self._white
+        )
+        death_rect = death_text.get_rect(center=(GLOBAL_WINDOW_WIDTH // 2, 300))
+
+        died = self._pixel_font_large.render("YOU DIED", True, self._red)
+        died_rect = died.get_rect(center=(GLOBAL_WINDOW_WIDTH // 2, 50))
+
+        self._surface.blit(death_text, death_rect)
+        self._surface.blit(died, died_rect)
 
 
 class PlayerSprite(pygame.sprite.Sprite):
