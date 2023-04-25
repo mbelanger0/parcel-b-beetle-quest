@@ -63,9 +63,10 @@ class TextController(Controller):
         returns:
             pygame key object representing the current key that is being pressed down
         """
-        for event in pygame.event.get():
-            if event.type == pygame.KEYDOWN:
-                return event.key
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN:
+                    return event.key
 
     def find_result_map(self, next_direction):
         """
