@@ -104,6 +104,7 @@ while True:
                     # seconds, then quit the game
                     pygame.time.wait(10000)
                     pygame.quit()
+                    sys.exit()
 
             # If there is a game end message and the player hasn't already died,
             # it is assumed that they won.
