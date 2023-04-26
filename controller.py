@@ -26,13 +26,6 @@ class Controller(ABC):
         """
 
     @abstractmethod
-    def find_travel_directions(self, next_directions):
-        """
-        Abstract method used to determine what direction the player can
-        move at each decision point on the map
-        """
-
-    @abstractmethod
     def find_result_event(self, event_id, event_data):
         """
         Abstract method to determine what event follows an event decision
@@ -77,15 +70,16 @@ class TextController(Controller):
         Return:
             integer representing the map ID to progress to
         """
-        decision = self.get_next_move(next_direction)
-        if decision == pygame.K_LEFT and next_direction[0] != None:
-            return next_direction[0]
-        if decision == pygame.K_RIGHT and next_direction[1] != None:
-            return next_direction[1]
-        if decision == pygame.K_UP and next_direction[2] != None:
-            return next_direction[2]
-        if decision == pygame.K_DOWN and next_direction[3] != None:
-            return next_direction[3]
+        while True:
+            decision = self.get_next_move()
+            if decision == pygame.K_LEFT and next_direction[0] != None:
+                return next_direction[0]
+            if decision == pygame.K_RIGHT and next_direction[1] != None:
+                return next_direction[1]
+            if decision == pygame.K_UP and next_direction[2] != None:
+                return next_direction[2]
+            if decision == pygame.K_DOWN and next_direction[3] != None:
+                return next_direction[3]
 
     def find_result_event(self, event_id):
         """
@@ -110,16 +104,16 @@ class TextController(Controller):
 
         # Continue to loop until a correct key is pressed
         while True:
-            decision = self.get_next_move(moves)
+            decision = self.get_next_move()
             for index, key in enumerate(moves):
                 if decision == key:
                     return (
                         # In importing to JSON, lists are stored as strings,
                         # and literal_eval converts from the string back into a
                         # list
-                        literal_eval(current_event["OptionResultID"])[index],
-                        literal_eval(current_event["HealthChange"])[index],
-                        literal_eval(current_event["AddInventory"])[index],
-                        literal_eval(current_event["GameEnd"])[index],
-                        literal_eval(current_event["ItemCheck"])[index],
+                        current_event["OptionResultID"][index],
+                        current_event["HealthChange"][index],
+                        current_event["AddInventory"][index],
+                        current_event["GameEnd"][index],
+                        current_event["ItemCheck"][index],
                     )

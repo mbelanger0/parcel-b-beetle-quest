@@ -39,6 +39,8 @@ event_data = event_scene.scene_data
 map_scene = scene.MapScene(displaysurface, player)
 map_data = map_scene.scene_data
 
+controls = controller.TextController("data/event_data/events.json")
+
 # Define map starting point
 START_SCENE = 0
 current_map_scene = START_SCENE
@@ -62,7 +64,9 @@ while True:
     try:
         while True:
             current_event = map_data[current_map_scene]["SpecialEvent"]
+            print("Loaded special event")
             current_event_data = event_data[int(current_event)]
+            print("Loaded current event")
 
             event_scene.draw(current_event)
             pygame.display.update()
@@ -74,7 +78,7 @@ while True:
                 inventory_change,
                 end_message,
                 item_check,
-            ) = controller.find_result_event(current_event)
+            ) = controls.find_result_event(current_event)
 
             # If a particular event is changed by a the presence of an item in
             # the inventory, then modify the health that is to be removed.
@@ -115,7 +119,7 @@ while True:
             # Loop will continue with the next result id
             current_event_id = new_event_id
 
-    except (KeyError, ValueError):
+    except FileNotFoundError:  # (KeyError, ValueError)
         # If this block is reached, there is no event at the given map point,
         # so the code continues on.
         pass
@@ -124,6 +128,6 @@ while True:
 
     map_scene.draw(current_map_scene)
     pygame.display.update()
-    current_map_scene = controller.find_result_map(current_map_scene)
+    current_map_scene = controls.find_result_map(current_map_scene)
 
     FramePerSec.tick(FPS)

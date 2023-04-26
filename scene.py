@@ -251,19 +251,22 @@ class EventScene(Scene):
         event_scene = self._scene_data[event_id]
 
         # Load event background image
-        self._event_background = pygame.image.load(
-            event_scene["BackgroundImage"]
-        )
+        # TODO: Implment this properly
+        # self._event_background = pygame.image.load(
+        #     event_scene["BackgroundImage"]
+        # )
+        self._surface.fill((0, 0, 0))
 
         # Load event character image
-        self._event_character = pygame.image.load(event_scene["PromptImage"])
+        # self._event_character = pygame.image.load(event_scene["PromptImage"])
+        event_character = pygame.image.load("data/event_data/bee_sprite.png")
 
         # Draw background
-        self._surface.blit(self._event_background, (0, 0))
+        # self._surface.blit(self._event_background, (0, 0))
 
         # Draw character
         self._surface.blit(
-            self._event_character,
+            event_character,
             (3 * GLOBAL_WINDOW_WIDTH / 4, GLOBAL_WINDOW_HEIGHT / 2),
         )
 
@@ -272,10 +275,6 @@ class EventScene(Scene):
             event_scene["TextPrompt"], True, self._white
         )
         self._surface.blit(prompt, (250, 75))
-
-        # Determine event options prompts
-        option_one = event_scene["O1Text"]
-        option_two = event_scene["O2Text"]
 
         # Convert text options into a list
         options = literal_eval(event_scene["TextOptions"])
