@@ -59,6 +59,7 @@ class Scene(ABC):
         # Define font text colors
         self._white = WHITE
         self._red = (255, 0, 0)
+        self._green = (0, 255, 0)
 
     @abstractmethod
     def draw(self, scene_id):
@@ -251,7 +252,7 @@ class EventScene(Scene):
         event_scene = self._scene_data[event_id]
 
         # Load event background image
-        # TODO: Implment this properly
+        # TODO: Implement this properly
         # self._event_background = pygame.image.load(
         #     event_scene["BackgroundImage"]
         # )
@@ -283,7 +284,7 @@ class EventScene(Scene):
         # keys to press
         options_string = ""
         for index, option in enumerate(options):
-            options_string += f"{option} (press {index}), "
+            options_string += f"{option} (press {index + 1}), "
         # Remove the final trailing space and comma from the string
         options_string = options_string[0 : len(options_string) - 2]
 
@@ -353,6 +354,25 @@ class EventScene(Scene):
 
         self._surface.blit(death_text, death_rect)
         self._surface.blit(died, died_rect)
+
+    def draw_win_scene(self, win_message):
+        """
+        Draw a scene telling the player they have won along with the associated
+        win message
+
+        Args:
+            win_message: string representing the win message to be printed
+        """
+        self._surface.fill((0, 0, 0))
+
+        win_text = self._pixel_font_small.render(win_message, True, self._white)
+        win_rect = win_text.get_rect(center=(GLOBAL_WINDOW_WIDTH // 2, 300))
+
+        won = self._pixel_font_large.render("YOU WON!", True, self._green)
+        won_rect = won.get_rect(center=(GLOBAL_WINDOW_WIDTH // 2, 50))
+
+        self._surface.blit(win_text, win_rect)
+        self._surface.blit(won, won_rect)
 
 
 class PlayerSprite(pygame.sprite.Sprite):

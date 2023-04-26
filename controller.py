@@ -100,7 +100,7 @@ class TextController(Controller):
         current_event = self._event_data[event_id]
 
         # Based on number of options, determine which keys can be pressed
-        moves = EVENT_KEYS[0 : len(current_event["TextOptions"])]
+        moves = EVENT_KEYS[0 : len(literal_eval(current_event["TextOptions"]))]
 
         # Continue to loop until a correct key is pressed
         while True:
@@ -111,9 +111,9 @@ class TextController(Controller):
                         # In importing to JSON, lists are stored as strings,
                         # and literal_eval converts from the string back into a
                         # list
-                        current_event["OptionResultID"][index],
-                        current_event["HealthChange"][index],
-                        current_event["AddInventory"][index],
-                        current_event["GameEnd"][index],
-                        current_event["ItemCheck"][index],
+                        literal_eval(current_event["OptionResultID"])[index],
+                        literal_eval(current_event["HealthChange"])[index],
+                        literal_eval(current_event["AddInventory"])[index],
+                        literal_eval(current_event["GameEnd"])[index],
+                        literal_eval(current_event["ItemCheck"])[index]
                     )
