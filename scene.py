@@ -19,6 +19,7 @@ EVENT_SCENES_FILEPATH = "data/event_data/events.json"
 
 FONT_FILEPATH = "data/fonts/pixel.ttf"
 SMALL_FONT_SIZE = 20
+CHARACTERS_PER_LINE = 40
 LARGE_FONT_SIZE = 48
 
 # Constants related to positioning text within the window
@@ -28,6 +29,9 @@ BOTTOM_EDGE_OFFSET = 25
 
 HEALTH_HEIGHT = 10
 INVENTORY_HEIGHT = HEALTH_HEIGHT + (LINE_OFFSET * 2)
+
+# Text Color Constants
+WHITE = (255, 255, 255)
 
 
 # Constants related to printing directions
@@ -53,7 +57,7 @@ class Scene(ABC):
         )
 
         # Define font text colors
-        self._white = (255, 255, 255)
+        self._white = WHITE
         self._red = (255, 0, 0)
 
     @abstractmethod
@@ -273,9 +277,20 @@ class EventScene(Scene):
         option_one = event_scene["O1Text"]
         option_two = event_scene["O2Text"]
 
+        # Convert text options into a list
+        options = literal_eval(event_scene["TextOptions"])
+
+        # Convert all text options into one string and display the corresponding
+        # keys to press
+        options_string = ""
+        for index, option in enumerate(options):
+            options_string += f"{option} (press {index}), "
+        # Remove the final trailing space and comma from the string
+        options_string = options_string[0 : len(options_string) - 2]
+
         # Draw event options onto surface
         option_text = self._pixel_font_small.render(
-            f"{option_one} or {option_two}", True, self._white
+            options_string, True, self._white
         )
         options_text_rect = option_text.get_rect(
             center=(GLOBAL_WINDOW_WIDTH / 2, 8 * GLOBAL_WINDOW_HEIGHT / 9)
@@ -481,3 +496,57 @@ def display_inventory(surface, font, inventory, width, height):
                 (height + (LINE_OFFSET * (index + 1))),  # y cords
             ),
         )
+
+
+def split_text_to_lines(surface, font, start, direction, text):
+    """
+    Split text that is too long to fit on the screen into a single line into
+    multiple lines and print to surface.
+
+    Based on the input of direction, lines will either be added on top of the
+    starting point or below the starting point.
+
+    Args:
+        surface: pygame surface on which to print text
+        font: pygame font to print text using
+        start: tuple of ints (width, height) where first line of text
+            should be printed
+        direction: boolean with True representing lines above start and False
+            below
+        text: string representing all text to be printed
+    """
+    # Multiplier to move in positive or negative direction pixel-wise based on
+    # the direction input
+    if direction:
+        direction_multiplier = -1
+    else:
+        direction_multiplier = 1
+
+    lines = []
+
+    # Split the text into lines CHARACTERS_PER_LINE long
+    while len(text) > CHARACTERS_PER_LINE:
+        lines.append(text[0:CHARACTERS_PER_LINE])
+        text = text[CHARACTERS_PER_LINE : len(text)]
+
+    # Append the line shorter than number per line or the entire thing if
+    # shorter than the number per line to the split text
+    lines.append(text)
+
+    # If the text is being printed up from the starting coordinates, then the
+    # list of lines needs to be reversed since the text is printed bottom up.
+    if direction:
+        lines = lines.reverse()
+
+    # Print each line sequentially on the screen
+    for index, line in enumerate(lines):
+        line_text = font.render(line, True, WHITE)
+        text_rect = text.get_rect(
+            center=(
+                start[0],
+                # Each line of text adds a standard amount of spacing
+                # per line to the height
+                start[1] + (index * LINE_OFFSET * direction_multiplier),
+            )
+        )
+        surface.blit(line_text, text_rect)

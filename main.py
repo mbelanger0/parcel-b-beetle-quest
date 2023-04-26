@@ -82,7 +82,7 @@ while True:
             # This tuple is structured (str, int), where string is the item
             # being searched for in inventory and the int is the difference
             # in the amount of damage done (such that damage done is decreased)
-            if item_check != "":
+            if item_check != None:
                 if player.in_inventory(item_check(0)):
                     health_change -= item_check(1)
 
@@ -93,7 +93,7 @@ while True:
                 # message, potentially with a custom death message
                 alive = player.update_health(health_change)
                 if not alive:
-                    if end_message != "":
+                    if end_message != None:
                         event_scene.draw_death_scene(end_message)
                     else:
                         event_scene.draw_death_scene()
@@ -108,7 +108,7 @@ while True:
             # If there is a game end message and the player hasn't already died,
             # it is assumed that they won.
 
-            if inventory_change != "":
+            if inventory_change != None:
                 player.update_inventory(inventory_change)
 
             # Loop will continue with the next result id

@@ -5,14 +5,12 @@ Take keyboard input to control different scenes within the game.
 from abc import ABC, abstractmethod
 import pygame
 from json import load
+from ast import literal_eval
 
 
-key_conversion = {
-    pygame.K_LEFT: "Left",
-    pygame.K_RIGHT: "Right",
-    pygame.K_UP: "Top",
-    pygame.K_DOWN: "Down",
-}
+# Define all possible keys that will be looked for during event sequences. This
+# defines the maximum number of options to be displayed.
+EVENT_KEYS = [pygame.K_1, pygame.K_2, pygame.K_3, pygame.K_4]
 
 
 class Controller(ABC):
@@ -103,22 +101,25 @@ class TextController(Controller):
             string representing a game outcome message
             tuple (string, int) with inventory modifier information
         """
-        moves = [pygame.K_0, pygame.K_1]
+        # Load the current event data to determine how many options are possible
+        # and what the results of the keypress will be
         current_event = self._event_data[event_id]
-        decision = self.get_next_move(moves)
-        if decision == pygame.K_0:
-            return (
-                current_event["O1ResultEventID"],
-                current_event["O1HealthChange"],
-                current_event["O1AddInventory"],
-                current_event["O1GameEnd"],
-                current_event["ItemCheck"],
-            )
-        if decision == pygame.K_1:
-            return (
-                current_event["O2ResultEventID"],
-                current_event["O2HealthChange"],
-                current_event["O2AddInventory"],
-                current_event["O2GameEnd"],
-                current_event["ItemCheck"],
-            )
+
+        # Based on number of options, determine which keys can be pressed
+        moves = EVENT_KEYS[0 : len(current_event["TextOptions"])]
+
+        # Continue to loop until a correct key is pressed
+        while True:
+            decision = self.get_next_move(moves)
+            for index, key in enumerate(moves):
+                if decision == key:
+                    return (
+                        # In importing to JSON, lists are stored as strings,
+                        # and literal_eval converts from the string back into a
+                        # list
+                        literal_eval(current_event["OptionResultID"])[index],
+                        literal_eval(current_event["HealthChange"])[index],
+                        literal_eval(current_event["AddInventory"])[index],
+                        literal_eval(current_event["GameEnd"])[index],
+                        literal_eval(current_event["ItemCheck"])[index],
+                    )
