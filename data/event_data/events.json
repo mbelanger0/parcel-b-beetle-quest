@@ -1,10 +1,261 @@
 [
     {
         "ID": 0,
-        "TextPrompt": "A bee is attacking you!",
-        "PromptImage": "data/event_data/bee_sprite.png",
-        "BackgroundImage": "data/event_data/Olin_College.jpg",
-        "O1Text": "Run (press 0)",
-        "O2Text": "Swat (press 1)"
+        "Name": "prologue",
+        "TextPrompt": "You are a student in your first ever semester at a small engineering college. For one of your classes, you've been tasked with going into the local forest, called Parcel B, and taking a photo of a click beetle for a project on biomimicry. It is already 10 pm the night this photo is due. You could go into Parcel B to look for a click beetle, but after hearing rumors of the cryptid named Old Man Herb who notoriously lurks in Parcel B looking for students to snatch, you have second thoughts. You could always just google an image of a click beetle. What do you Do?",
+        "TextOptions": "[\"Go into Parcel B\", \"Find a photo online\"]",
+        "OptionResultID": "[1, None]",
+        "HealthChange": "[0, 10]",
+        "AddInventory": "[None, None]",
+        "GameEnd": "[None, \"You find a photo of a click beetle online and submit it on Canvas at 10:03 PM. The next day you get an email from the school's Honor Board summoning you to discuss your recent academic disintegrity. You have been Honor Boarded! YOU LOST Want to try again?\"]",
+        "ItemCheck": "[None, None]"
+    },
+    {
+        "ID": 1,
+        "Name": "item grab",
+        "TextPrompt": "You are exiting your dorm room and only have time to grab one thing before exiting due to the looming Canvas deadline. What item do you grab?",
+        "TextOptions": "[\"Jacket\", \"Flashlight\"]",
+        "OptionResultID": "[2, 3]",
+        "HealthChange": "[0, 0]",
+        "AddInventory": "[\"Jacket\", \"Flashlight\"]",
+        "GameEnd": "[None, None]",
+        "ItemCheck": "[None, None]"
+    },
+    {
+        "ID": 2,
+        "Name": "Jacket",
+        "TextPrompt": "A jacket has been added to your inventory. You have made it to the outskirts of Parcel B. Which entrance would you like to go into?",
+        "TextOptions": "[\"Northern Entrance (near the pond)\", \"Southern Entrance (near the soccer field)\"]",
+        "OptionResultID": "[None, 4]",
+        "HealthChange": "[10, 0]",
+        "AddInventory": "[None, None]",
+        "GameEnd": "[\"Despite your caution you fall into the big pond and the ravenous goldfish lurking beneath the water's surface eat you. YOU LOST. Would you like to try again?\", None]",
+        "ItemCheck": "[None, None]"
+    },
+    {
+        "ID": 3,
+        "Name": "Flashlight",
+        "TextPrompt": "A flashlight has been added to your inventory. You have made it to the outskirts of Parcel B. Which entrance would you like to go into?",
+        "TextOptions": "[\"Northern Entrance (near the pond)\", \"Southern Entrance (near the soccer field)\"]",
+        "OptionResultID": "[None, 4]",
+        "HealthChange": "[10, 0]",
+        "AddInventory": "[None, None]",
+        "GameEnd": "[\"Despite your caution you fall into the big pond and the ravenous goldfish lurking beneath the water's surface eat you. YOU LOST. Would you like to try again?\", None]",
+        "ItemCheck": "[None, None]"
+    },
+    {
+        "ID": 4,
+        "Name": "First Direction",
+        "TextPrompt": "Which direction would you like to go?",
+        "TextOptions": "[\"Forward\", \"Right\"]",
+        "OptionResultID": "[5, 6]",
+        "HealthChange": "[3, 5]",
+        "AddInventory": "[None, None]",
+        "GameEnd": "[None, None]",
+        "ItemCheck": "[(\"Jacket\", 1), (\"Jacket\", 3)]"
+    },
+    {
+        "ID": 5,
+        "Name": "Forward Bee Fight",
+        "TextPrompt": "Bees appear and sting you! You lost health. What do you do next?",
+        "TextOptions": "[\"Run\", \"Swat\"]",
+        "OptionResultID": "[7, 8]",
+        "HealthChange": "[1, 4]",
+        "AddInventory": "[None, None]",
+        "GameEnd": "[None, None]",
+        "ItemCheck": "[None, None]"
+    },
+    {
+        "ID": 6,
+        "Name": "Right Bee Fight",
+        "TextPrompt": "Bees appear and sting you! You lost health. What do you do next?",
+        "TextOptions": "[\"Run\", \"Swat\"]",
+        "OptionResultID": "[9, None]",
+        "HealthChange": "[3, 0]",
+        "AddInventory": "[None, None]",
+        "GameEnd": "[None, \"More bees appear and attack. You die. YOU LOST. Want to try again?\"]",
+        "ItemCheck": "[None, None]"
+    },
+    {
+        "ID": 7,
+        "TextPrompt": "The bees chase you. You lose health. What do you do next?",
+        "TextOptions": "[\"Run\", \"Swat\"]",
+        "OptionResultID": "[10, 11]",
+        "HealthChange": "[1, 2]",
+        "AddInventory": "[None, None]",
+        "GameEnd": "[None, None]",
+        "ItemCheck": "[None, None]"
+    },
+    {
+        "ID": 8,
+        "TextPrompt": "More bees appear and attack. You lose 4 HP. What do you do next?",
+        "TextOptions": "[\"Run\", \"Swat\"]",
+        "OptionResultID": "[10, 11]",
+        "HealthChange": "[1, 2]",
+        "AddInventory": "[None, None]",
+        "GameEnd": "[None, None]",
+        "ItemCheck": "[None, None]"
+    },
+    {
+        "ID": 9,
+        "TextPrompt": "The bees chase you. You lose 3 HP. What do you do next.",
+        "TextOptions": "[\"Run\", \"Swat\"]",
+        "OptionResultID": "[10, 11]",
+        "HealthChange": "[1, 2]",
+        "AddInventory": "[None, None]",
+        "GameEnd": "[None, None]",
+        "ItemCheck": "[None, None]"
+    },
+    {
+        "ID": 10,
+        "TextPrompt": "The bees chase you. You lose 1 HP. You come to a fork in the road, would you like to go right or left?",
+        "TextOptions": "[\"Left\", \"Right\"]",
+        "OptionResultID": "[None, 12]",
+        "HealthChange": "[10, 0]",
+        "AddInventory": "[None, None]",
+        "GameEnd": "[\"While traveling along the path you fall into what seems to be a large man-made, well student-made, hole. You hurt your ankle and cannot get out until someone finds you in the morning. YOU LOST. Would you like to try again?\", None]",
+        "ItemCheck": "[None, None]"
+    },
+    {
+        "ID": 11,
+        "TextPrompt": "More bees appear and attack. You lose 2 HP. You come to a fork in the road, would you like to go right or left?",
+        "TextOptions": "[\"Left\", \"Right\"]",
+        "OptionResultID": "[None, 12]",
+        "HealthChange": "[10, 0]",
+        "AddInventory": "[None, None]",
+        "GameEnd": "[\"While traveling along the path you fall into what seems to be a large man-made, well student-made, hole. You hurt your ankle and cannot get out until someone finds you in the morning. YOU LOST. Would you like to try again?\", None]",
+        "ItemCheck": "[None, None]"
+    },
+    {
+        "ID": 12,
+        "Name": "Treehouse spotted",
+        "TextPrompt": "You come upon an old and decrepit tree house. As you approach, a piece of debris falls and hits you on the head. You are unhurt, but now on edge. You hear a rustle inside and against your better judgement get closer. As unlikely as it seems, it could be a click beetle. What do you do next?",
+        "TextOptions": "[\"Call out, 'Hello? Anyone there?'\", \"Sneak into the treehouse\"]",
+        "OptionResultID": "[13, 13]",
+        "HealthChange": "[0, 0]",
+        "AddInventory": "[None, None]",
+        "GameEnd": "[None, None]",
+        "ItemCheck": "[None, None]"
+    },
+    {
+        "ID": 13,
+        "Name": "Old Man Herb appears",
+        "TextPrompt": "An old man appears, wrinkled and hunched over. He bears a vague resemblance to Bernie Sanders in the dim lighting, but instead of Bernie's kind and welcoming eyes, you are met with fierce and angry eyes.As you look at him for longer, you realize that he is covered in plants and moss. His hands are outstretched as though he wants to grab you. It's all coming together in your mind. But it can't be! Can it? You thought he was just a myth, but here he is, Old Man Herb, before your own eyes.What do you do?",
+        "TextOptions": "[\"Talk\", \"Attach\"]",
+        "OptionResultID": "[None, 14]",
+        "HealthChange": "[10, 0]",
+        "AddInventory": "[None, None]",
+        "GameEnd": "[\"You try to level with Old Man Herb. You 'have a school project' and you'll 'leave as soon as you get a photo.' While this would be effective in most cases, Old Man Herb doesn't seem to understand a word you're saying. While your guard is down, he attacks. And you? Let's just say you don't make it out alive. YOU LOST. Would you like to try again?\", None]",
+        "ItemCheck": "[None, None]"
+    },
+    {
+        "ID": 14,
+        "Name": "Attack",
+        "TextPrompt": "How are you going to attack?",
+        "TextOptions": "[\"Use flashlight\", \"Punch\", \"UNO reverse (grab Old Man Herb)\"]",
+        "OptionResultID": "[15, 16, 17]",
+        "HealthChange": "[0, 0]",
+        "AddInventory": "[None, None]",
+        "GameEnd": "[None, None]",
+        "ItemCheck": "[None, None]"
+    },
+    {
+        "ID": 15,
+        "Name": "Blinded Herb",
+        "TextPrompt": "Old Man Herb is briefly blinded by your flashlight, giving you the opportunity to strike him while he's defenseless. What next?",
+        "TextOptions": "[\"Punch\", \"UNO reverse (grab Old Man Herb)\"]",
+        "OptionResultID": "[18, 19]",
+        "HealthChange": "[0, 0]",
+        "AddInventory": "[None, None]",
+        "GameEnd": "[None, None]",
+        "ItemCheck": "[None, None]"
+    },
+    {
+        "ID": 16,
+        "Name": "Punch",
+        "TextPrompt": "You try to punch him but he dodges out of the way, your fist only narrowly making contact with him.",
+        "TextOptions": "[\"Attack Again\", \"Look Around\"]",
+        "OptionResultID": "[None, 22]",
+        "HealthChange": "[10, 0]",
+        "AddInventory": "[None, None]",
+        "GameEnd": "[\"Old Man Herb, though weakened by your efforts, is able to fight back, deflecting your punch and delivering his own. Let's just say you didn't make it out alive. YOU LOST. Would you like to try again?\", None]",
+        "ItemCheck": "[None, None]"
+    },
+    {
+        "ID": 17,
+        "Name": "Uno reverse",
+        "TextPrompt": "ou try to grab Old Man Herb but he escapes your grasp before he's even in it.",
+        "TextOptions": "[\"Attack Again\", \"Look Around\"]",
+        "OptionResultID": "[None, 22]",
+        "HealthChange": "[10, 0]",
+        "AddInventory": "[None, None]",
+        "GameEnd": "[\"Old Man Herb, though weakened by your efforts, is able to fight back, deflecting your punch and delivering his own. Let's just say you didn't make it out alive. YOU LOST. Would you like to try again?\", None]",
+        "ItemCheck": "[None, None]"
+    },
+    {
+        "ID": 18,
+        "Name": "Punch",
+        "TextPrompt": "You punch Old Man Herb and he falls to the ground in pain. After half a second he is standing back up. What now?",
+        "TextOptions": "[\"Attack Again\", \"Look Around\"]",
+        "OptionResultID": "[20, 21]",
+        "HealthChange": "[4, 0]",
+        "AddInventory": "[None, None]",
+        "GameEnd": "[None, None]",
+        "ItemCheck": "[None, None]"
+    },
+    {
+        "ID": 19,
+        "Name": "Uno reverse",
+        "TextPrompt": "You grab Old Man Herb but realize that you didn't think this through as well as you should've. Did you really have a plan for once you grabbed him? Didn't think so. Old Man Herb shakes free. What now?",
+        "TextOptions": "[\"Attack Again\", \"Look Around\"]",
+        "OptionResultID": "[20, 21]",
+        "HealthChange": "[4, 0]",
+        "AddInventory": "[None, None]",
+        "GameEnd": "[None, None]",
+        "ItemCheck": "[None, None]"
+    },
+    {
+        "ID": 20,
+        "Name": "Embarrassing attempt",
+        "TextPrompt": "Your efforts are embarrassing and he fights back. You lose 4 HP. What would you like to do?",
+        "TextOptions": "[\"Run away\", \"Punch him\"]",
+        "OptionResultID": "[None, None]",
+        "HealthChange": "[10, 0]",
+        "AddInventory": "[None, None]",
+        "GameEnd": "[\"You are able to successfully run away and get back to your dorm. Your safety is more important than getting a picture of a click beetle, except for in this game. YOU LOST. Would you like to try again?\", \"This punch is successful and he falls to the ground. From inside of his jacket, a bunch of click beetles hop out and pose ready for you to take a picture. You get your hopper photo, upload it to Canvas, and then safely exit Parcel B. YOU WON! Want to try a different path?\"]",
+        "ItemCheck": "[None, None]"
+    },
+    {
+        "ID": 21,
+        "Name": "Rock",
+        "TextPrompt": "You look around with your flashlight and find a large but throwable sized rock which you pick up. What do you do now?",
+        "TextOptions": "[\"Throw it\", \"Return the rock to nature\"]",
+        "OptionResultID": "[None, None]",
+        "HealthChange": "[0, 10]",
+        "AddInventory": "[None, None]",
+        "GameEnd": "[\"You throw the rock at Old Man Herb, and it seems to have defeated him. From inside of his jacket, a bunch of click beetles hop out and pose ready for you to take a picture. You get your hopper photo, upload it to Canvas, and then safely exit Parcel B. YOU WON! Want to try a different path?\", \"You return the rock back to its spot on the forest floor. While you were busy maintaining the undisturbed beauty of Parcel B, Old man herb snuck up behind you. Let's just say you didn't make it out alive. YOU LOST. Would you like to try again?\"]",
+        "ItemCheck": "[None, None]"
+    },
+    {
+        "ID": 22,
+        "Name": "Rock",
+        "TextPrompt": "You look around and find a decent sized rock which you pick up. What do you do now?",
+        "TextOptions": "[\"Throw it\", \"Return the rock to nature\"]",
+        "OptionResultID": "[23, None]",
+        "HealthChange": "[0, 10]",
+        "AddInventory": "[None, None]",
+        "GameEnd": "[None, \"You return the rock back to its spot on the forest floor. While you were busy maintaining the undisturbed beauty of Parcel B, Old man herb snuck up behind you. Let's just say you didn't make it out alive. YOU LOST. Would you like to try again?\"]",
+        "ItemCheck": "[None, None]"
+    },
+    {
+        "ID": 23,
+        "Name": "Rock thrown",
+        "TextPrompt": "You throw the rock at Old Man herb and he is wounded but still very much alive. What next?",
+        "TextOptions": "[\"Throw another rock\", \"Punch him!\"]",
+        "OptionResultID": "[None, None]",
+        "HealthChange": "[0, 10]",
+        "AddInventory": "[None, None]",
+        "GameEnd": "[\"You throw another rock at Old Man Herb, and it seems to have defeated him. From inside of his jacket, a bunch of click beetles hop out and pose ready for you to take a picture. You get your hopper photo, upload it to Canvas, and then safely exit Parcel B. YOU WON! Want to try a different path?\", \"Old Man Herb, though weakened by your efforts, is able to fight back, deflecting your punch and delivering his own. Let's just say you didn't make it out alive.. YOU LOST. Would you like to try again?\"]",
+        "ItemCheck": "[None, None]"
     }
 ]
