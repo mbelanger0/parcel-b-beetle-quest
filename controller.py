@@ -15,7 +15,7 @@ EVENT_KEYS = [pygame.K_1, pygame.K_2, pygame.K_3, pygame.K_4]
 
 class Controller(ABC):
     """
-    Docstring
+    Abstract class to handle player input
     """
 
     @abstractmethod
@@ -115,5 +115,5 @@ class TextController(Controller):
                         literal_eval(current_event["HealthChange"])[index],
                         literal_eval(current_event["AddInventory"])[index],
                         literal_eval(current_event["GameEnd"])[index],
-                        literal_eval(current_event["ItemCheck"])[index]
+                        literal_eval(current_event["ItemCheck"])[index],
                     )

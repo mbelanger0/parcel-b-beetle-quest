@@ -8,24 +8,22 @@ from abc import ABC, abstractmethod
 
 class Character(ABC):
     """
-    Docstring
+    Abstract class used to implement classes for the player character
+    and the characters in the events
     """
 
     def __init__(self, sprite_path):
+        """
+        Determine file path to the sprite image that will represent a character
+        in an event or the player character
+        """
         self._sprite_path = sprite_path
 
 
 class EventCharacter(Character):
     """
-    Docstring
+    Class to represent the characters in the events that are not the player
     """
-
-    def __init__(self, sprite_path, location):
-        """
-        Docstring
-        """
-        super().__init__(sprite_path)
-        self._location = location
 
 
 DEFAULT_PLAYER_HEALTH = 10
@@ -33,10 +31,18 @@ DEFAULT_PLAYER_HEALTH = 10
 
 class PlayerCharacter(Character):
     """
-    Docstring
+    Class to track the location, health, and inventory state of the player
     """
 
     def __init__(self, sprite_path):
+        """
+        Determine file path to image of character sprite and set starting health
+        and inventory conditions
+
+        Args:
+            sprite: sprite_path: string representing the file path to the image
+            of the player character sprite
+        """
         super().__init__(sprite_path)
         self._sprite_path = sprite_path
         self._health = DEFAULT_PLAYER_HEALTH
@@ -45,14 +51,22 @@ class PlayerCharacter(Character):
     @property
     def health(self):
         """
-        Docstring
+        Return current player health
+
+        Return:
+            integer less than 10 representing the current health
+            of the player
         """
         return self._health
 
     @property
     def filepath(self):
         """
-        Docstring
+        Return file path to image of the player character sprite
+
+        Returns:
+            string representing the file path to the image of
+            the player character sprite
         """
         return self._sprite_path
 

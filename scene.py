@@ -19,7 +19,7 @@ EVENT_SCENES_FILEPATH = "data/event_data/events.json"
 
 FONT_FILEPATH = "data/fonts/pixel.ttf"
 SMALL_FONT_SIZE = 20
-CHARACTERS_PER_LINE = 40
+WORDS_PER_LINE = 9
 LARGE_FONT_SIZE = 48
 
 # Constants related to positioning text within the window
@@ -35,14 +35,26 @@ WHITE = (255, 255, 255)
 
 
 # Constants related to printing directions
-DIRECTION_KEY = ["Left ->", "Right ->", "Up ^", "Down V"]
+DIRECTION_KEY = ["Left <-", "Right ->", "Up ^", "Down V"]
 
 # Constant prints
 DEFAULT_DEATH_MESSAGE = "Your health has reached zero."
 
 
 class Scene(ABC):
+    """
+    Handles displaying and updating scenes to the player
+    """
+
     def __init__(self, surface) -> None:
+        """
+        Loads the pygame surface that scenes will be displayed on and
+        defines the fonts that will be used on text throughout the game
+
+        Args:
+            surface: pygame surface representing the surface to draw
+            scenes objects on to
+        """
         super().__init__()
 
         # Load the pygame surface being used
@@ -266,16 +278,20 @@ class EventScene(Scene):
         # self._surface.blit(self._event_background, (0, 0))
 
         # Draw character
-        self._surface.blit(
-            event_character,
-            (3 * GLOBAL_WINDOW_WIDTH / 4, GLOBAL_WINDOW_HEIGHT / 2),
-        )
+        if event_id != 0:
+            self._surface.blit(
+                event_character,
+                (3 * GLOBAL_WINDOW_WIDTH / 4, GLOBAL_WINDOW_HEIGHT / 2),
+            )
 
         # Draw text prompt onto surface
-        prompt = self._pixel_font_small.render(
-            event_scene["TextPrompt"], True, self._white
+        split_text_to_lines(
+            self._surface,
+            self._pixel_font_small,
+            (GLOBAL_WINDOW_WIDTH / 2, GLOBAL_WINDOW_HEIGHT / 8),
+            False,
+            event_scene["TextPrompt"],
         )
-        self._surface.blit(prompt, (250, 75))
 
         # Convert text options into a list
         options = literal_eval(event_scene["TextOptions"])
@@ -289,20 +305,21 @@ class EventScene(Scene):
         options_string = options_string[0 : len(options_string) - 2]
 
         # Draw event options onto surface
-        option_text = self._pixel_font_small.render(
-            options_string, True, self._white
+        split_text_to_lines(
+            self._surface,
+            self._pixel_font_small,
+            (GLOBAL_WINDOW_WIDTH / 2, 21 * GLOBAL_WINDOW_HEIGHT / 24),
+            False,
+            options_string,
         )
-        options_text_rect = option_text.get_rect(
-            center=(GLOBAL_WINDOW_WIDTH / 2, 8 * GLOBAL_WINDOW_HEIGHT / 9)
-        )
-        self._surface.blit(option_text, options_text_rect)
 
         # Draw character sprite
-        player_sprite = PlayerSprite(self._player)
-        player_sprite_rect = player_sprite.image.get_rect(
-            center=(GLOBAL_WINDOW_WIDTH / 2, GLOBAL_WINDOW_HEIGHT / 2)
-        )
-        self._surface.blit(player_sprite.image, player_sprite_rect)
+        if event_id != 0:
+            player_sprite = PlayerSprite(self._player)
+            player_sprite_rect = player_sprite.image.get_rect(
+                center=(GLOBAL_WINDOW_WIDTH / 2, GLOBAL_WINDOW_HEIGHT / 2)
+            )
+            self._surface.blit(player_sprite.image, player_sprite_rect)
 
         # Draw current player health
         display_health(
@@ -344,15 +361,22 @@ class EventScene(Scene):
         # TODO: deal with multiline text here
         self._surface.fill((0, 0, 0))
 
-        death_text = self._pixel_font_small.render(
-            death_message, True, self._white
+        #        death_text = self._pixel_font_small.render(
+        #            death_message, True, self._white
+        #        )
+        #        death_rect = death_text.get_rect(center=(GLOBAL_WINDOW_WIDTH // 2, 300))
+        split_text_to_lines(
+            self._surface,
+            self._pixel_font_small,
+            (GLOBAL_WINDOW_WIDTH / 2, GLOBAL_WINDOW_HEIGHT / 2),
+            False,
+            death_message,
         )
-        death_rect = death_text.get_rect(center=(GLOBAL_WINDOW_WIDTH // 2, 300))
 
         died = self._pixel_font_large.render("YOU DIED", True, self._red)
         died_rect = died.get_rect(center=(GLOBAL_WINDOW_WIDTH // 2, 50))
 
-        self._surface.blit(death_text, death_rect)
+        # self._surface.blit(death_text, death_rect)
         self._surface.blit(died, died_rect)
 
     def draw_win_scene(self, win_message):
@@ -365,13 +389,19 @@ class EventScene(Scene):
         """
         self._surface.fill((0, 0, 0))
 
-        win_text = self._pixel_font_small.render(win_message, True, self._white)
-        win_rect = win_text.get_rect(center=(GLOBAL_WINDOW_WIDTH // 2, 300))
+        #     win_text = self._pixel_font_small.render(win_message, True, self._white)
+        #     win_rect = win_text.get_rect(center=(GLOBAL_WINDOW_WIDTH // 2, 300))
+        split_text_to_lines(
+            self._surface,
+            self._pixel_font_small,
+            (GLOBAL_WINDOW_WIDTH / 2, GLOBAL_WINDOW_HEIGHT / 2),
+            True,
+            win_message,
+        )
 
         won = self._pixel_font_large.render("YOU WON!", True, self._green)
         won_rect = won.get_rect(center=(GLOBAL_WINDOW_WIDTH // 2, 50))
 
-        self._surface.blit(win_text, win_rect)
         self._surface.blit(won, won_rect)
 
 
@@ -398,6 +428,9 @@ class PlayerSprite(pygame.sprite.Sprite):
     def width(self):
         """
         Return the width of the image representing the sprite
+
+        Returns:
+            integer representing the width of the sprite
         """
         return self._width
 
@@ -405,6 +438,9 @@ class PlayerSprite(pygame.sprite.Sprite):
     def height(self):
         """
         Return the height of the image representing the sprite
+
+        Returns:
+            integer representing the height of the sprite
         """
         return self._height
 
@@ -412,6 +448,9 @@ class PlayerSprite(pygame.sprite.Sprite):
     def image(self):
         """
         Return the pygame image object representing the Sprite
+
+        Returns:
+            pygame image object representing the Sprite
         """
         return self._image
 
@@ -541,16 +580,18 @@ def split_text_to_lines(surface, font, start, direction, text):
     else:
         direction_multiplier = 1
 
+    text_split = text.split(" ")
     lines = []
 
-    # Split the text into lines CHARACTERS_PER_LINE long
-    while len(text) > CHARACTERS_PER_LINE:
-        lines.append(text[0:CHARACTERS_PER_LINE])
-        text = text[CHARACTERS_PER_LINE : len(text)]
+    # Split the text into lines WORDS_PER_LINE words long
+    while len(text_split) > WORDS_PER_LINE:
+        words = " ".join(text_split[0:WORDS_PER_LINE])
+        lines.append(words)
+        text_split = text_split[WORDS_PER_LINE : len(text_split)]
 
     # Append the line shorter than number per line or the entire thing if
     # shorter than the number per line to the split text
-    lines.append(text)
+    lines.append(" ".join(text_split[0 : len(text_split)]))
 
     # If the text is being printed up from the starting coordinates, then the
     # list of lines needs to be reversed since the text is printed bottom up.
@@ -560,7 +601,7 @@ def split_text_to_lines(surface, font, start, direction, text):
     # Print each line sequentially on the screen
     for index, line in enumerate(lines):
         line_text = font.render(line, True, WHITE)
-        text_rect = text.get_rect(
+        text_rect = line_text.get_rect(
             center=(
                 start[0],
                 # Each line of text adds a standard amount of spacing
