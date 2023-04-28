@@ -38,8 +38,8 @@ player = PlayerCharacter(PLAYER_SPRITE_FILEPATH)
 # can occur.
 event_scene = scene.EventScene(displaysurface, player)
 event_data = event_scene.scene_data
-# map_scene = scene.MapScene(displaysurface, player)
-# map_data = map_scene.scene_data
+map_scene = scene.MapScene(displaysurface, player)
+map_data = map_scene.scene_data
 
 controls = controller.TextController("data/event_data/events.json")
 
@@ -63,91 +63,92 @@ while True:
     # Since events often lead to new events, this loop continues until an error
     # is thrown, representing that you have reached the end of the current event
     # tree.
-    current_event = event_data[current_map_scene]["ID"]
-    # print("Loaded special event")
-    current_event_data = event_data[int(current_event)]
-    # try:
 
-    while True:
-        # print("Loaded current event")
-        print("current event: " + str(current_event))
+    try:
 
-        event_scene.draw(current_event)
-        pygame.display.update()
+        while True:
+            current_event = event_data[map_data[current_map_scene]["SpecialEvent"]]["ID"]
+            # print("Loaded special event")          
+            # print("Loaded current event")
+            print("current event: " + str(current_event))
 
-        # Get the player's input on which decision to make
-        (
-            new_event_id,
-            health_change,
-            inventory_change,
-            end_message,
-            item_check,
-        ) = controls.find_result_event(current_event)
-        print("new event: " + str(new_event_id))
-        print("item_check: " + str(item_check))
+            event_scene.draw(current_event)
+            pygame.display.update()
 
-        # If a particular event is changed by a the presence of an item in
-        # the inventory, then modify the health that is to be removed.
-        #
-        # This tuple is structured (str, int), where string is the item
-        # being searched for in inventory and the int is the difference
-        # in the amount of damage done (such that damage done is decreased)
-        if item_check != None:
-            if player.in_inventory(item_check[0]):
-                health_change -= item_check[1]
+            # Get the player's input on which decision to make
+            (
+                new_event_id,
+                health_change,
+                inventory_change,
+                end_message,
+                item_check,
+            ) = controls.find_result_event(current_event)
+            print("new event: " + str(new_event_id))
+            print("item_check: " + str(item_check))
 
-        # Update player state based on event outcome
-        if health_change != 0:
-            # Update health returns a boolean representing if the character
-            # is still alive. If the player has died, display a death
-            # message, potentially with a custom death message
-            alive = player.update_health(health_change)
-            if not alive:
-                if end_message != None:
-                    event_scene.draw_death_scene(end_message)
-                else:
-                    event_scene.draw_death_scene()
-                
-                pygame.display.update()
-                # If the player has died, display the death screen for 10
-                # seconds, then quit the game
-                pygame.time.wait(10000)
-                pygame.quit()
-                sys.exit()
+            # If a particular event is changed by a the presence of an item in
+            # the inventory, then modify the health that is to be removed.
+            #
+            # This tuple is structured (str, int), where string is the item
+            # being searched for in inventory and the int is the difference
+            # in the amount of damage done (such that damage done is decreased)
+            if item_check != None:
+                if player.in_inventory(item_check[0]):
+                    health_change -= item_check[1]
 
-        if health_change == 0 and end_message != None:
-                event_scene.draw_win_scene(end_message)
-                pygame.display.update()
-                # If the player has died, display the death screen for 10
-                # seconds, then quit the game
-                pygame.time.wait(10000)
-                pygame.quit()
-                sys.exit()
+            # Update player state based on event outcome
+            if health_change != 0:
+                # Update health returns a boolean representing if the character
+                # is still alive. If the player has died, display a death
+                # message, potentially with a custom death message
+                alive = player.update_health(health_change)
+                if not alive:
+                    if end_message != None:
+                        event_scene.draw_death_scene(end_message)
+                    else:
+                        event_scene.draw_death_scene()
+                    
+                    pygame.display.update()
+                    # If the player has died, display the death screen for 10
+                    # seconds, then quit the game
+                    pygame.time.wait(10000)
+                    pygame.quit()
+                    sys.exit()
 
-
-        # If there is a game end message and the player hasn't already died,
-        # it is assumed that they won.
-
-        if inventory_change != None:
-            player.update_inventory(inventory_change)
-
-        # Loop will continue with the next result id
-        current_event = new_event_id
-        print(current_event)
-        FramePerSec.tick(FPS)
+            if health_change == 0 and end_message != None:
+                    event_scene.draw_win_scene(end_message)
+                    pygame.display.update()
+                    # If the player has died, display the death screen for 10
+                    # seconds, then quit the game
+                    pygame.time.wait(10000)
+                    pygame.quit()
+                    sys.exit()
 
 
-    # except (FileNotFoundError, KeyError, ValueError):
+            # If there is a game end message and the player hasn't already died,
+            # it is assumed that they won.
+
+            if inventory_change != None:
+                player.update_inventory(inventory_change)
+
+            # Loop will continue with the next result id
+            current_event = new_event_id
+            print(current_event)
+            FramePerSec.tick(FPS)
+
+
+    except (FileNotFoundError, KeyError, ValueError, IndexError):
     # If this block is reached, there is no event at the given map point,
     # so the code continues on.
-    # print("Error")
+        print("Error")
 
     # Print the map scene and then get the next map location
 
-    #    map_scene.draw(current_map_scene)
-    #    pygame.display.update()
-    #    current_map_scene = controls.find_result_map(
-    #        literal_eval(map_data[current_map_scene]["DirectionsToMove"])
-    #    )
+        map_scene.draw(current_map_scene)
+        pygame.display.update()
+        current_map_scene = controls.find_result_map(
+            literal_eval(map_data[current_map_scene]["DirectionsToMove"])
+        )
+        current_event = current_map_scene
 
     
