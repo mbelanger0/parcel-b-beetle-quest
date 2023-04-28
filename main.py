@@ -65,10 +65,11 @@ while True:
     # tree.
 
     try:
-
         while True:
-            current_event = event_data[map_data[current_map_scene]["SpecialEvent"]]["ID"]
-            # print("Loaded special event")          
+            current_event = event_data[
+                map_data[current_map_scene]["SpecialEvent"]
+            ]["ID"]
+            # print("Loaded special event")
             # print("Loaded current event")
             print("current event: " + str(current_event))
 
@@ -107,7 +108,7 @@ while True:
                         event_scene.draw_death_scene(end_message)
                     else:
                         event_scene.draw_death_scene()
-                    
+
                     pygame.display.update()
                     # If the player has died, display the death screen for 10
                     # seconds, then quit the game
@@ -116,14 +117,13 @@ while True:
                     sys.exit()
 
             if health_change == 0 and end_message != None:
-                    event_scene.draw_win_scene(end_message)
-                    pygame.display.update()
-                    # If the player has died, display the death screen for 10
-                    # seconds, then quit the game
-                    pygame.time.wait(10000)
-                    pygame.quit()
-                    sys.exit()
-
+                event_scene.draw_win_scene(end_message)
+                pygame.display.update()
+                # If the player has died, display the death screen for 10
+                # seconds, then quit the game
+                pygame.time.wait(10000)
+                pygame.quit()
+                sys.exit()
 
             # If there is a game end message and the player hasn't already died,
             # it is assumed that they won.
@@ -136,13 +136,12 @@ while True:
             print(current_event)
             FramePerSec.tick(FPS)
 
-
     except (FileNotFoundError, KeyError, ValueError, IndexError):
-    # If this block is reached, there is no event at the given map point,
-    # so the code continues on.
+        # If this block is reached, there is no event at the given map point,
+        # so the code continues on.
         print("Error")
 
-    # Print the map scene and then get the next map location
+        # Print the map scene and then get the next map location
 
         map_scene.draw(current_map_scene)
         pygame.display.update()
@@ -150,5 +149,3 @@ while True:
             literal_eval(map_data[current_map_scene]["DirectionsToMove"])
         )
         current_event = current_map_scene
-
-    

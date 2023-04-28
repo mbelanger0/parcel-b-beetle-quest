@@ -100,13 +100,16 @@ class PlayerCharacter(Character):
         Update player's inventory; if item is in it, remove it, or add it
         if it is not already present.
 
+        Converts all objects being added to the inventory into strings
+        for ease of printing later.
+
         Args:
             item: string representing item to be added or removed.
         """
         if item in self._inventory:
             self._inventory.remove(item)
         else:
-            self._inventory.append(item)
+            self._inventory.append(str(item))
 
     def in_inventory(self, item):
         """
