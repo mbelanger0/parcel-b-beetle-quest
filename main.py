@@ -107,7 +107,7 @@ while True:
                     event_scene.draw_death_scene(end_message)
                 else:
                     event_scene.draw_death_scene()
-                
+
                 pygame.display.update()
                 # If the player has died, display the death screen for 10
                 # seconds, then quit the game
@@ -116,14 +116,13 @@ while True:
                 sys.exit()
 
         if health_change == 0 and end_message != None:
-                event_scene.draw_win_scene(end_message)
-                pygame.display.update()
-                # If the player has died, display the death screen for 10
-                # seconds, then quit the game
-                pygame.time.wait(10000)
-                pygame.quit()
-                sys.exit()
-
+            event_scene.draw_win_scene(end_message)
+            pygame.display.update()
+            # If the player has died, display the death screen for 10
+            # seconds, then quit the game
+            pygame.time.wait(10000)
+            pygame.quit()
+            sys.exit()
 
         # If there is a game end message and the player hasn't already died,
         # it is assumed that they won.
@@ -136,10 +135,9 @@ while True:
         print(current_event)
         FramePerSec.tick(FPS)
 
-
-    # except (FileNotFoundError, KeyError, ValueError):
+    # except KeyError:
     # If this block is reached, there is no event at the given map point,
-    # so the code continues on.
+    # so the code continues on
     # print("Error")
 
     # Print the map scene and then get the next map location
@@ -149,5 +147,3 @@ while True:
     #    current_map_scene = controls.find_result_map(
     #        literal_eval(map_data[current_map_scene]["DirectionsToMove"])
     #    )
-
-    
