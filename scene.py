@@ -302,9 +302,7 @@ class EventScene(Scene):
         options = literal_eval(event_scene["TextOptions"])
 
         # Check for flashlight in three options case
-        if len(options) == 3 and PlayerCharacter(
-            "data/sprite_data/resting.png"
-        ).in_inventory("Flashlight"):
+        if len(options) == 3 and not self._player.in_inventory("Flashlight"):
             options = options[1 : len(options)]
 
         # Convert all text options into one string and display the corresponding
