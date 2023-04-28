@@ -34,7 +34,7 @@ class Controller(ABC):
 
 class TextController(Controller):
     """
-    Docstring
+    Controls the players interaction with the game.
     """
 
     def __init__(self, event_data):

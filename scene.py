@@ -9,6 +9,7 @@ from ast import literal_eval
 
 import pygame
 from pygame.locals import *
+from character import PlayerCharacter
 
 GLOBAL_WINDOW_WIDTH = 800
 GLOBAL_WINDOW_HEIGHT = 500
@@ -21,6 +22,9 @@ FONT_FILEPATH = "data/fonts/pixel.ttf"
 SMALL_FONT_SIZE = 20
 WORDS_PER_LINE = 9
 LARGE_FONT_SIZE = 48
+
+# Constraint for whether or not to display sprites
+MAX_STRING_LENGTH = 280
 
 # Constants related to positioning text within the window
 SIDE_EDGE_OFFSET = 10
@@ -263,25 +267,20 @@ class EventScene(Scene):
         # Load data for current even
         event_scene = self._scene_data[event_id]
 
-        # Load event background image
-        # TODO: Implement this properly
-        # self._event_background = pygame.image.load(
-        #     event_scene["BackgroundImage"]
-        # )
-        self._surface.fill((0, 0, 0))
+        if event_scene["BackgroundImage"] != "":
+            # Load event background image
+            event_background = pygame.image.load(event_scene["BackgroundImage"])
+            # Draw background
+            self._surface.blit(event_background, (0, 0))
+        else:
+            self._surface.fill((0, 0, 0))
 
-        # Load event character image
-        # self._event_character = pygame.image.load(event_scene["PromptImage"])
-        event_character = pygame.image.load("data/event_data/bee_sprite.png")
-
-        # Draw background
-        # self._surface.blit(self._event_background, (0, 0))
-
-        # Draw character
-        if event_id != 0:
+        # Load and draw event character image
+        if event_scene["PromptImage"] != "":
+            event_character = pygame.image.load(event_scene["PromptImage"])
             self._surface.blit(
                 event_character,
-                (3 * GLOBAL_WINDOW_WIDTH / 4, GLOBAL_WINDOW_HEIGHT / 2),
+                (4 * GLOBAL_WINDOW_WIDTH / 5, GLOBAL_WINDOW_HEIGHT / 2),
             )
 
         # Draw text prompt onto surface
@@ -295,6 +294,12 @@ class EventScene(Scene):
 
         # Convert text options into a list
         options = literal_eval(event_scene["TextOptions"])
+
+        # Check for flashlight in three options case
+        if len(options) == 3 and PlayerCharacter(
+            "data/sprite_data/resting.png"
+        ).in_inventory("Flashlight"):
+            options = options[1 : len(options)]
 
         # Convert all text options into one string and display the corresponding
         # keys to press
@@ -314,7 +319,8 @@ class EventScene(Scene):
         )
 
         # Draw character sprite
-        if event_id != 0:
+        # Don't draw sprites when most of the window is text
+        if len(event_scene["TextPrompt"]) < MAX_STRING_LENGTH:
             player_sprite = PlayerSprite(self._player)
             player_sprite_rect = player_sprite.image.get_rect(
                 center=(GLOBAL_WINDOW_WIDTH / 2, GLOBAL_WINDOW_HEIGHT / 2)
@@ -389,13 +395,11 @@ class EventScene(Scene):
         """
         self._surface.fill((0, 0, 0))
 
-        #     win_text = self._pixel_font_small.render(win_message, True, self._white)
-        #     win_rect = win_text.get_rect(center=(GLOBAL_WINDOW_WIDTH // 2, 300))
         split_text_to_lines(
             self._surface,
             self._pixel_font_small,
             (GLOBAL_WINDOW_WIDTH / 2, GLOBAL_WINDOW_HEIGHT / 2),
-            True,
+            False,
             win_message,
         )
 
