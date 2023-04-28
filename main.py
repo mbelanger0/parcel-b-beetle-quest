@@ -65,10 +65,10 @@ while True:
     # tree.
 
     try:
+        current_event = event_data[map_data[current_map_scene]["SpecialEvent"]][
+            "ID"
+        ]
         while True:
-            current_event = event_data[
-                map_data[current_map_scene]["SpecialEvent"]
-            ]["ID"]
             # print("Loaded special event")
             # print("Loaded current event")
             print("current event: " + str(current_event))
