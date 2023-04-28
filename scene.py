@@ -11,37 +11,34 @@ import pygame
 from pygame.locals import *
 from character import PlayerCharacter
 
+# Pygame window size constants
 GLOBAL_WINDOW_WIDTH = 800
 GLOBAL_WINDOW_HEIGHT = 500
 
+# External file constants
 MAP_SCENES_FILEPATH = "data/scene_data/map.json"
 MAP_BACKGROUND_FILEPATH = "data/scene_data/map1.png"
 EVENT_SCENES_FILEPATH = "data/event_data/events.json"
 
+# Pygame font constants
 FONT_FILEPATH = "data/fonts/pixel.ttf"
 SMALL_FONT_SIZE = 20
 WORDS_PER_LINE = 9
 LARGE_FONT_SIZE = 48
-
-# Constraint for whether or not to display sprites
-MAX_STRING_LENGTH = 280
+WHITE = (255, 255, 255)
 
 # Constants related to positioning text within the window
 SIDE_EDGE_OFFSET = 10
 LINE_OFFSET = 30
 BOTTOM_EDGE_OFFSET = 25
-
+MAX_STRING_LENGTH = 280
 HEALTH_HEIGHT = 10
 INVENTORY_HEIGHT = HEALTH_HEIGHT + (LINE_OFFSET * 2)
 
-# Text Color Constants
-WHITE = (255, 255, 255)
-
-
-# Constants related to printing directions
+# Text constants related to printing directions
 DIRECTION_KEY = ["Left <-", "Right ->", "Up ^", "Down V"]
 
-# Constant prints
+# Constant messages to print
 DEFAULT_DEATH_MESSAGE = "Your health has reached zero."
 
 
@@ -88,8 +85,9 @@ class Scene(ABC):
 class MapScene(Scene):
     def __init__(self, surface, player) -> None:
         """
-        Draw a map scene, including displaying the background correctly and
-        displaying the character sprite/character health information.
+        Init. a map scene to be drawn, including taking in the surface to be
+        drawn on and taking in a player so that model state information can be
+        printed.
 
         Args:
             surface: pygame Surface object on which to draw
@@ -104,13 +102,13 @@ class MapScene(Scene):
         # Load the map scene background image
         #
         # Additionally, store the size of the image to later ensure that the
-        # screen does not display beyond the edge of the map
+        # screen does not display beyond the edge of the map (this uses pillows)
         self._map_background = pygame.image.load(MAP_BACKGROUND_FILEPATH)
         self._map_width, self._map_height = Image.open(
             MAP_BACKGROUND_FILEPATH
         ).size
 
-        # Load the player character for later reference
+        # Load the player character for later reference (health, inventory, etc)
         self._player = player
 
     @property
@@ -119,13 +117,21 @@ class MapScene(Scene):
         Return the scene data loaded from the external file.
 
         Returns:
-            Dictionary with string keys and string/integer values
+            Dictionary with string keys and string/integer values representing
+                all scene data
         """
         return self._scene_data
 
     def draw(self, scene_id):
         """
         Display the scene of the specified ID in the Pygame window.
+
+        This function prints all necessary information to display a scene,
+        including setting the background and displaying directions the player
+        can travel and printing player state information like health and
+        inventory. The method additionally processes the scene data to
+        determine the directions the player can travel and displays appropriate
+        instructions.
 
         Args:
             scene_id: integer ID of the scene to be loaded from the map scene
@@ -233,8 +239,8 @@ class MapScene(Scene):
             (
                 SIDE_EDGE_OFFSET,  # x coords
                 GLOBAL_WINDOW_HEIGHT  # y coords - from bottom edge
-                - (directions * LINE_OFFSET)  # offset based on # of directions
-                - BOTTOM_EDGE_OFFSET,  # standard bottom offset
+                - (directions * LINE_OFFSET)  # offset y based on # of direction
+                - BOTTOM_EDGE_OFFSET,  # offset y by standard bottom offset
             ),
         )
 
@@ -362,13 +368,9 @@ class EventScene(Scene):
             death_message: string representing the death message to be printed.
                 Defaults to a message that you're out of health.
         """
-        # TODO: deal with multiline text here
+        # Clear the screen; make a black background
         self._surface.fill((0, 0, 0))
 
-        #        death_text = self._pixel_font_small.render(
-        #            death_message, True, self._white
-        #        )
-        #        death_rect = death_text.get_rect(center=(GLOBAL_WINDOW_WIDTH // 2, 300))
         split_text_to_lines(
             self._surface,
             self._pixel_font_small,
@@ -380,7 +382,6 @@ class EventScene(Scene):
         died = self._pixel_font_large.render("YOU DIED", True, self._red)
         died_rect = died.get_rect(center=(GLOBAL_WINDOW_WIDTH // 2, 50))
 
-        # self._surface.blit(death_text, death_rect)
         self._surface.blit(died, died_rect)
 
     def draw_win_scene(self, win_message):
@@ -410,7 +411,7 @@ class EventScene(Scene):
 class PlayerSprite(pygame.sprite.Sprite):
     """
     Turn our player character object into a sprite object that pygame can
-    draw.
+    draw it correctly.
     """
 
     def __init__(self, character) -> None:  # , *groups: _Group) -> None:
