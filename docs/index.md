@@ -2,122 +2,49 @@
 layout: default
 ---
 
-Text can be **bold**, _italic_, or ~~strikethrough~~.
+TODO: insert image slideshow here
 
-[Link to another page](./another-page.html).
+![](images/pbbq-1.PNG)
 
-There should be whitespace between paragraphs.
+# Overview
 
-There should be whitespace between paragraphs. We recommend including a README, or a file with information about your project.
+Parcel B: Beetle Quest is a text-based choose-your-own adventure game themed
+around common experiences as a first year at Olin College of Engineering.
 
-# Header 1
+Players move through a map trying to find a click beetle, encountering various
+strange creatures, creations, and other oddities in Parcel B (a small forest
+next to Olin's campus) as they go.
 
-This is a normal paragraph following a header. GitHub is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere.
+Parcel B: Beetle Quest is:
+* Unique each time you play
+* Close to home for Olin students in theme
+* Compatible with any device that has Python
+* Open-source and easy to add your own theme and storyline
 
-## Header 2
+## Technical Information
 
-> This is a blockquote following a header.
->
-> When something is important enough, you do it even if the odds are not in your favor.
+Parcel B: Beetle Quest is written to be cross-platform using Python and the
+pygame Python library. This library provides all the necessary features related
+to making the game window, displaying text, character, and events, and getting
+keyboard input from the user.
 
-### Header 3
+All game data is stores in JSON files containing information about map locations
+and images, event sequences and outcomes, and win/loss outcomes of the game.
+This structure allows for easily swapping out event and map datafiles (along
+with their referenced images) in order to add new content to the game or
+change the theme and events completely.
 
-```js
-// Javascript code with syntax highlighting.
-var fun = function lang(l) {
-  dateformat.i18n = require('./lang/' + l)
-  return true;
-}
-```
+## Installation Instructions
 
-```ruby
-# Ruby code with syntax highlighting
-GitHubPages::Dependencies.gems.each do |gem, version|
-  s.add_dependency(gem, "= #{version}")
-end
-```
+Download, install dependencies, and run! Parcel B: Beetle Quest is easy to run
+on any system that already has Python.
+1. Clone the repository to your computer from [GitHub](https://github.com/olincollege/parcel-b-beetle-quest)
+2. Install all game  dependencies by running `pip install -r requirements.txt`
+from the game directory.
+3. Run the game by running `python main.py` from the game directory.
 
-#### Header 4
+More information can be found in the [project's readme](https://github.com/olincollege/parcel-b-beetle-quest).
 
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
-
-##### Header 5
-
-1.  This is an ordered list following a header.
-2.  This is an ordered list following a header.
-3.  This is an ordered list following a header.
-
-###### Header 6
-
-| head1        | head two          | three |
-|:-------------|:------------------|:------|
-| ok           | good swedish fish | nice  |
-| out of stock | good and plenty   | nice  |
-| ok           | good `oreos`      | hmm   |
-| ok           | good `zoute` drop | yumm  |
-
-### There's a horizontal rule below this.
-
-* * *
-
-### Here is an unordered list:
-
-*   Item foo
-*   Item bar
-*   Item baz
-*   Item zip
-
-### And an ordered list:
-
-1.  Item one
-1.  Item two
-1.  Item three
-1.  Item four
-
-### And a nested list:
-
-- level 1 item
-  - level 2 item
-  - level 2 item
-    - level 3 item
-    - level 3 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-  - level 2 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-- level 1 item
-
-### Small image
-
-![Octocat](https://github.githubassets.com/images/icons/emoji/octocat.png)
-
-### Large image
-
-![Branching](https://guides.github.com/activities/hello-world/branching.png)
-
-
-### Definition lists can be used with HTML syntax.
-
-<dl>
-<dt>Name</dt>
-<dd>Godzilla</dd>
-<dt>Born</dt>
-<dd>1952</dd>
-<dt>Birthplace</dt>
-<dd>Japan</dd>
-<dt>Color</dt>
-<dd>Green</dd>
-</dl>
-
-```
-Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
-```
-
-```
-The final element.
-```
+## Project Contributors
+Parcel B: Beetle Quest was written by Carter Harris, Mark Belanger, and Elin
+O'Neill as part of the Software Design course at Olin College of Engineering.
