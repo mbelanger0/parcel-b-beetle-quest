@@ -4,8 +4,10 @@ Take keyboard input to control different scenes within the game.
 
 from abc import ABC, abstractmethod
 import pygame
+from pygame.locals import *
 from json import load
 from ast import literal_eval
+import sys
 
 
 # Define all possible keys that will be looked for during event sequences. This
@@ -56,6 +58,9 @@ class TextController(Controller):
         """
         while True:
             for event in pygame.event.get():
+                if event.type == QUIT:
+                    pygame.quit()
+                    sys.exit()
                 if event.type == pygame.KEYDOWN:
                     return event.key
 
