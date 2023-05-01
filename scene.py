@@ -17,7 +17,7 @@ GLOBAL_WINDOW_HEIGHT = 500
 
 # External file constants
 MAP_SCENES_FILEPATH = "data/scene_data/map.json"
-MAP_BACKGROUND_FILEPATH = "data/scene_data/map1.png"
+MAP_BACKGROUND_FILEPATH = "data/scene_data/map_final.png"
 EVENT_SCENES_FILEPATH = "data/event_data/events.json"
 
 # Pygame font constants
