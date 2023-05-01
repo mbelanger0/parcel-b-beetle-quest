@@ -59,7 +59,7 @@
         "MapPointCenterWidth": 398,
         "MapPointCenterHeight": 592,
         "SpecialEvent": 6,
-        "DirectionsToMove": "(None, None, None, None)",
+        "DirectionsToMove": "(None, None, 7, None)",
         "": null
     },
     {
@@ -131,7 +131,7 @@
         "MapPointCenterWidth": 603,
         "MapPointCenterHeight": 884,
         "SpecialEvent": 5,
-        "DirectionsToMove": "(None, None, None, None)",
+        "DirectionsToMove": "(None, None, 15, None)",
         "": null
     },
     {
