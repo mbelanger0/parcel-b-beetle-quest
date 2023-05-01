@@ -58,7 +58,7 @@
         "PromptImage": "",
         "TextPrompt": "Which direction would you like to go?",
         "TextOptions": "[\"Forward\", \"Right\"]",
-        "OptionResultID": -100,
+        "OptionResultID": "[-100, -100]",
         "HealthChange": "[3, 5]",
         "AddInventory": "[None, None]",
         "GameEnd": "[None, None]",
