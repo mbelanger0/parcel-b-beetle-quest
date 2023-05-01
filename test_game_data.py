@@ -75,14 +75,24 @@ def test_next_event_references():
         # to Python
         next_events = literal_eval(event["OptionResultID"])
 
-        for next_event in next_events:
-            # None is used to signify that the end of an event tree is reached,
+        for index, next_event in enumerate(next_events):
+            # -100 is used to signify that the end of an event tree is reached,
             # and should throw an exception that is handled in the code to exit
             # back to the main map.
-            if next_event is None:
+            if next_event == -100:
+                with pytest.raises(IndexError):
+                    event_data[next_event]
+            # None is used as a seperate event tree end to signify that the
+            # player has either won or lost the game. As such, there should
+            # be something in the GameEnd variable to display as a death/win
+            # message
+            elif next_event == None:
                 with pytest.raises(TypeError):
                     event_data[next_event]
+                assert literal_eval(event["GameEnd"])[index] is not None
+
             else:
                 # If the value isn't None (meaning it should continue on to
                 # another event), this statement should execute without error.
+                print(next_event)
                 event_data[next_event]
