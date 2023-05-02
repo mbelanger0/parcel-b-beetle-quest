@@ -48,11 +48,6 @@ START_SCENE = 0
 current_map_scene = START_SCENE
 
 while True:
-    for event in pygame.event.get():
-        if event.type == QUIT:
-            pygame.quit()
-            sys.exit()
-
     # Check if there is a valid event that occurs at this scene. If so, this
     # event should be drawn first.
     #
