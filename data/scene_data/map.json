@@ -21,7 +21,7 @@
         "MapPointCenterWidth": 737,
         "MapPointCenterHeight": 700,
         "SpecialEvent": -100,
-        "DirectionsToMove": "(None, None, 3, 11)"
+        "DirectionsToMove": "(None, 1, 3, 11)"
     },
     {
         "ID": 3,
@@ -29,7 +29,7 @@
         "MapPointCenterWidth": 710,
         "MapPointCenterHeight": 530,
         "SpecialEvent": -100,
-        "DirectionsToMove": "(None, None, 4, None)"
+        "DirectionsToMove": "(None, None, 4, 2)"
     },
     {
         "ID": 4,
@@ -37,7 +37,7 @@
         "MapPointCenterWidth": 600,
         "MapPointCenterHeight": 540,
         "SpecialEvent": -100,
-        "DirectionsToMove": "(None, None, 5, None)"
+        "DirectionsToMove": "(None, 3, 5, None)"
     },
     {
         "ID": 5,
@@ -45,7 +45,7 @@
         "MapPointCenterWidth": 504,
         "MapPointCenterHeight": 600,
         "SpecialEvent": -100,
-        "DirectionsToMove": "(None, None, 6, None)"
+        "DirectionsToMove": "(None, 4, 6, None)"
     },
     {
         "ID": 6,
@@ -69,7 +69,7 @@
         "MapPointCenterWidth": 505,
         "MapPointCenterHeight": 1660,
         "SpecialEvent": -100,
-        "DirectionsToMove": "(None, None, 9, None)"
+        "DirectionsToMove": "(7, None, 9, None)"
     },
     {
         "ID": 9,
@@ -93,7 +93,7 @@
         "MapPointCenterWidth": 670,
         "MapPointCenterHeight": 850,
         "SpecialEvent": -100,
-        "DirectionsToMove": "(None, None, 12, None)"
+        "DirectionsToMove": "(None, 2, 12, None)"
     },
     {
         "ID": 12,
