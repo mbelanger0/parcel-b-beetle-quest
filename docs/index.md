@@ -2,9 +2,7 @@
 layout: default
 ---
 
-TODO: insert image slideshow here
-
-![](images/pbbq-1.PNG)
+![](images/map-scene.PNG)
 
 # Overview
 
@@ -23,6 +21,8 @@ Parcel B: Beetle Quest is:
 * Close to home for Olin students in theme
 * Compatible with any device that has Python
 * Open-source and easy to add your own theme and storyline
+
+![](images/old-man-herb.PNG)
 
 ## Technical Information
 
@@ -49,6 +49,8 @@ from the game directory.
 
 More information can be found in the
 [project's readme](https://github.com/olincollege/parcel-b-beetle-quest).
+
+![](images/pbbq-1.PNG)
 
 ## Project Contributors
 Parcel B: Beetle Quest was written by Carter Harris, Mark Belanger, and Elin

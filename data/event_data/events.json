@@ -9,7 +9,7 @@
         "OptionResultID": "[1, None]",
         "HealthChange": "[0, 10]",
         "AddInventory": "[None, None]",
-        "GameEnd": "[None, \"You find a photo of a click beetle online and submit it on Canvas at 10:03 PM. The next day you get an email from the school's Honor Board summoning you to discuss your recent academic disintegrity. You have been Honor Boarded! YOU LOST Want to try again?\"]",
+        "GameEnd": "[None, \"You find a photo of a click beetle online and submit it on Canvas at 10:03 PM. The next day you get an email from the school's Honor Board summoning you to discuss your recent academic disintegrity. You have been Honor Boarded! YOU LOST\"]",
         "ItemCheck": "[None, None]"
     },
     {
@@ -87,7 +87,7 @@
         "OptionResultID": "[9, None]",
         "HealthChange": "[3, 10]",
         "AddInventory": "[None, None]",
-        "GameEnd": "[None, \"More bees appear and attack. You die. YOU LOST. Want to try again?\"]",
+        "GameEnd": "[None, \"More bees appear and attack. You die. YOU LOST.\"]",
         "ItemCheck": "[None, None]"
     },
     {
