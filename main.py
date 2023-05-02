@@ -69,10 +69,6 @@ while True:
             "ID"
         ]
         while True:
-            # print("Loaded special event")
-            # print("Loaded current event")
-            print("current event: " + str(current_event))
-
             event_scene.draw(current_event)
             pygame.display.update()
 
@@ -84,8 +80,6 @@ while True:
                 end_message,
                 item_check,
             ) = controls.find_result_event(current_event)
-            print("new event: " + str(new_event_id))
-            print("item_check: " + str(item_check))
 
             # If a particular event is changed by a the presence of an item in
             # the inventory, then modify the health that is to be removed.
@@ -139,13 +133,13 @@ while True:
     except (FileNotFoundError, KeyError, ValueError, IndexError):
         # If this block is reached, there is no event at the given map point,
         # so the code continues on.
-        print("Error")
 
         # Print the map scene and then get the next map location
-
         map_scene.draw(current_map_scene)
         pygame.display.update()
         current_map_scene = controls.find_result_map(
             literal_eval(map_data[current_map_scene]["DirectionsToMove"])
         )
         current_event = current_map_scene
+        print(current_event)
+1

@@ -36,7 +36,7 @@ HEALTH_HEIGHT = 10
 INVENTORY_HEIGHT = HEALTH_HEIGHT + (LINE_OFFSET * 2)
 
 # Text constants related to printing directions
-DIRECTION_KEY = ["Left <-", "Right ->", "Up ^", "Down V"]
+DIRECTION_KEY = ["Left <-", "Right ->", "Forward ^", "Down V"]
 
 # Constant messages to print
 DEFAULT_DEATH_MESSAGE = "Your health has reached zero."
