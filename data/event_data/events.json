@@ -9,7 +9,7 @@
         "OptionResultID": "[1, None]",
         "HealthChange": "[0, 10]",
         "AddInventory": "[None, None]",
-        "GameEnd": "[None, \"You find a photo of a click beetle online and submit it on Canvas at 10:03 PM. The next day you get an email from the school's Honor Board summoning you to discuss your recent academic disintegrity. You have been Honor Boarded! YOU LOST\"]",
+        "GameEnd": "[None, \"You find a photo of a click beetle online and submit it on Canvas at 10:03 PM. The next day you get an email from the school's Honor Board summoning you to discuss your recent academic disintegrity. You have been Honor Boarded! YOU LOST. Try again.\"]",
         "ItemCheck": "[None, None]"
     },
     {
@@ -35,7 +35,7 @@
         "OptionResultID": "[None, -100]",
         "HealthChange": "[10, 0]",
         "AddInventory": "[None, None]",
-        "GameEnd": "[\"Despite your caution you fall into the big pond and the ravenous goldfish lurking beneath the water's surface eat you. YOU LOST. Would you like to try again?\", None]",
+        "GameEnd": "[\"Despite your caution you fall into the big pond and the ravenous goldfish lurking beneath the water's surface eat you. YOU LOST. Try again.\", None]",
         "ItemCheck": "[None, None]"
     },
     {
@@ -48,7 +48,7 @@
         "OptionResultID": "[None, -100]",
         "HealthChange": "[10, 0]",
         "AddInventory": "[None, None]",
-        "GameEnd": "[\"Despite your caution you fall into the big pond and the ravenous goldfish lurking beneath the water's surface eat you. YOU LOST. Would you like to try again?\", None]",
+        "GameEnd": "[\"Despite your caution you fall into the big pond and the ravenous goldfish lurking beneath the water's surface eat you. YOU LOST. Try again.\", None]",
         "ItemCheck": "[None, None]"
     },
     {
@@ -68,7 +68,7 @@
         "ID": 5,
         "Name": "Forward Bee Fight",
         "BackgroundImage": "",
-        "PromptImage": "",
+        "PromptImage": "data/event_data/bee_sprite.png",
         "TextPrompt": "Bees appear and sting you! You lost health. What do you do next?",
         "TextOptions": "[\"Run\", \"Swat\"]",
         "OptionResultID": "[7, 8]",
@@ -81,19 +81,19 @@
         "ID": 6,
         "Name": "Right Bee Fight",
         "BackgroundImage": "",
-        "PromptImage": "",
+        "PromptImage": "data/event_data/bee_sprite.png",
         "TextPrompt": "Bees appear and sting you! You lost health. What do you do next?",
         "TextOptions": "[\"Run\", \"Swat\"]",
         "OptionResultID": "[9, None]",
         "HealthChange": "[3, 10]",
         "AddInventory": "[None, None]",
-        "GameEnd": "[None, \"More bees appear and attack. You die. YOU LOST.\"]",
+        "GameEnd": "[None, \"More bees appear and attack. You die. YOU LOST. Try again.\"]",
         "ItemCheck": "[None, None]"
     },
     {
         "ID": 7,
         "BackgroundImage": "",
-        "PromptImage": "",
+        "PromptImage": "data/event_data/bee_sprite.png",
         "TextPrompt": "The bees chase you. You lose health. What do you do next?",
         "TextOptions": "[\"Run\", \"Swat\"]",
         "OptionResultID": "[10, 11]",
@@ -105,7 +105,7 @@
     {
         "ID": 8,
         "BackgroundImage": "",
-        "PromptImage": "",
+        "PromptImage": "data/event_data/bee_swarm.png",
         "TextPrompt": "More bees appear and attack. You lose 4 HP. What do you do next?",
         "TextOptions": "[\"Run\", \"Swat\"]",
         "OptionResultID": "[10, 11]",
@@ -117,7 +117,7 @@
     {
         "ID": 9,
         "BackgroundImage": "",
-        "PromptImage": "",
+        "PromptImage": "data/event_data/bee_sprite.png",
         "TextPrompt": "The bees chase you. You lose 3 HP. What do you do next.",
         "TextOptions": "[\"Run\", \"Swat\"]",
         "OptionResultID": "[10, 11]",
@@ -129,25 +129,25 @@
     {
         "ID": 10,
         "BackgroundImage": "",
-        "PromptImage": "",
+        "PromptImage": "data/event_data/bee_sprite.png",
         "TextPrompt": "The bees chase you. You lose 1 HP. You come to a fork in the road, would you like to go right or left?",
         "TextOptions": "[\"Left\", \"Right\"]",
         "OptionResultID": "[None, -100]",
         "HealthChange": "[10, 0]",
         "AddInventory": "[None, None]",
-        "GameEnd": "[\"While traveling along the path you fall into what seems to be a large man-made, well student-made, hole. You hurt your ankle and cannot get out until someone finds you in the morning. YOU LOST. Would you like to try again?\", None]",
+        "GameEnd": "[\"While traveling along the path you fall into what seems to be a large man-made, well student-made, hole. You hurt your ankle and cannot get out until someone finds you in the morning. YOU LOST. Try again.\", None]",
         "ItemCheck": "[None, None]"
     },
     {
         "ID": 11,
         "BackgroundImage": "",
-        "PromptImage": "",
+        "PromptImage": "data/event_data/bee_swarm.png",
         "TextPrompt": "More bees appear and attack. You lose 2 HP. You come to a fork in the road, would you like to go right or left?",
         "TextOptions": "[\"Left\", \"Right\"]",
         "OptionResultID": "[None, -100]",
         "HealthChange": "[10, 0]",
         "AddInventory": "[None, None]",
-        "GameEnd": "[\"While traveling along the path you fall into what seems to be a large man-made, well student-made, hole. You hurt your ankle and cannot get out until someone finds you in the morning. YOU LOST. Would you like to try again?\", None]",
+        "GameEnd": "[\"While traveling along the path you fall into what seems to be a large man-made, well student-made, hole. You hurt your ankle and cannot get out until someone finds you in the morning. YOU LOST. Try again.\", None]",
         "ItemCheck": "[None, None]"
     },
     {
@@ -168,12 +168,12 @@
         "BackgroundImage": "",
         "PromptImage": "data/event_data/oldmanherb.png",
         "Name": "Old Man Herb appears",
-        "TextPrompt": "An old man appears, wrinkled and hunched over. He bears a vague resemblance to Bernie Sanders in the dim lighting, but instead of Bernie's kind and welcoming eyes, you are met with fierce and angry eyes.As you look at him for longer, you realize that he is covered in plants and moss. His hands are outstretched as though he wants to grab you. It's all coming together in your mind. But it can't be! Can it? You thought he was just a myth, but here he is, Old Man Herb, before your own eyes.What do you do?",
+        "TextPrompt": "An old man appears, wrinkled and hunched over. He bears a vague resemblance to Bernie Sanders in the dim lighting, but instead of Bernie's kind and welcoming eyes, you are met with fierce and angry eyes.As you look at him for longer, you realize that he is covered in plants and moss. His hands are outstretched as though he wants to grab you. It's all coming together in your mind. But it can't be! Can it? You thought he was just a myth, but here he is, Old Man Herb, before your own eyes. What do you do?",
         "TextOptions": "[\"Talk\", \"Attack\"]",
         "OptionResultID": "[None, 14]",
         "HealthChange": "[10, 0]",
         "AddInventory": "[None, None]",
-        "GameEnd": "[\"You try to level with Old Man Herb. You 'have a school project' and you'll 'leave as soon as you get a photo.' While this would be effective in most cases, Old Man Herb doesn't seem to understand a word you're saying. While your guard is down, he attacks. And you? Let's just say you don't make it out alive. YOU LOST. Would you like to try again?\", None]",
+        "GameEnd": "[\"You try to level with Old Man Herb. You 'have a school project' and you'll 'leave as soon as you get a photo.' While this would be effective in most cases, Old Man Herb doesn't seem to understand a word you're saying. While your guard is down, he attacks. And you? Let's just say you don't make it out alive. YOU LOST. Try again.\", None]",
         "ItemCheck": "[None, None]"
     },
     {
@@ -212,7 +212,7 @@
         "OptionResultID": "[None, 22]",
         "HealthChange": "[10, 0]",
         "AddInventory": "[None, None]",
-        "GameEnd": "[\"Old Man Herb, though weakened by your efforts, is able to fight back, deflecting your punch and delivering his own. Let's just say you didn't make it out alive. YOU LOST. Would you like to try again?\", None]",
+        "GameEnd": "[\"Old Man Herb, though weakened by your efforts, is able to fight back, deflecting your punch and delivering his own. Let's just say you didn't make it out alive. YOU LOST. Try again.\", None]",
         "ItemCheck": "[None, None]"
     },
     {
@@ -225,7 +225,7 @@
         "OptionResultID": "[None, 22]",
         "HealthChange": "[10, 0]",
         "AddInventory": "[None, None]",
-        "GameEnd": "[\"Old Man Herb, though weakened by your efforts, is able to fight back, deflecting your punch and delivering his own. Let's just say you didn't make it out alive. YOU LOST. Would you like to try again?\", None]",
+        "GameEnd": "[\"Old Man Herb, though weakened by your efforts, is able to fight back, deflecting your punch and delivering his own. Let's just say you didn't make it out alive. YOU LOST. Try again.\", None]",
         "ItemCheck": "[None, None]"
     },
     {
@@ -264,7 +264,7 @@
         "OptionResultID": "[None, None]",
         "HealthChange": "[10, 0]",
         "AddInventory": "[None, None]",
-        "GameEnd": "[\"You are able to successfully run away and get back to your dorm. Your safety is more important than getting a picture of a click beetle, except for in this game. YOU LOST. Would you like to try again?\", \"This punch is successful and he falls to the ground. From inside of his jacket, a bunch of click beetles hop out and pose ready for you to take a picture. You get your hopper photo, upload it to Canvas, and then safely exit Parcel B. YOU WON! Want to try a different path?\"]",
+        "GameEnd": "[\"You are able to successfully run away and get back to your dorm. Your safety is more important than getting a picture of a click beetle, except for in this game. YOU LOST. Try again.\", \"This punch is successful and he falls to the ground. From inside of his jacket, a bunch of click beetles hop out and pose ready for you to take a picture. You get your hopper photo, upload it to Canvas, and then safely exit Parcel B. YOU WON! Now try a different path.\"]",
         "ItemCheck": "[None, None]"
     },
     {
@@ -277,7 +277,7 @@
         "OptionResultID": "[None, None]",
         "HealthChange": "[0, 10]",
         "AddInventory": "[None, None]",
-        "GameEnd": "[\"You throw the rock at Old Man Herb, and it seems to have defeated him. From inside of his jacket, a bunch of click beetles hop out and pose ready for you to take a picture. You get your hopper photo, upload it to Canvas, and then safely exit Parcel B. YOU WON! Want to try a different path?\", \"You return the rock back to its spot on the forest floor. While you were busy maintaining the undisturbed beauty of Parcel B, Old man herb snuck up behind you. Let's just say you didn't make it out alive. YOU LOST. Would you like to try again?\"]",
+        "GameEnd": "[\"You throw the rock at Old Man Herb, and it seems to have defeated him. From inside of his jacket, a bunch of click beetles hop out and pose ready for you to take a picture. You get your hopper photo, upload it to Canvas, and then safely exit Parcel B. YOU WON! Now try a different path.\", \"You return the rock back to its spot on the forest floor. While you were busy maintaining the undisturbed beauty of Parcel B, Old man herb snuck up behind you. Let's just say you didn't make it out alive. YOU LOST. Try again.\"]",
         "ItemCheck": "[None, None]"
     },
     {
@@ -290,7 +290,7 @@
         "OptionResultID": "[23, None]",
         "HealthChange": "[0, 10]",
         "AddInventory": "[None, None]",
-        "GameEnd": "[None, \"You return the rock back to its spot on the forest floor. While you were busy maintaining the undisturbed beauty of Parcel B, Old man herb snuck up behind you. Let's just say you didn't make it out alive. YOU LOST. Would you like to try again?\"]",
+        "GameEnd": "[None, \"You return the rock back to its spot on the forest floor. While you were busy maintaining the undisturbed beauty of Parcel B, Old man herb snuck up behind you. Let's just say you didn't make it out alive. YOU LOST. Try again.\"]",
         "ItemCheck": "[None, None]"
     },
     {
@@ -303,7 +303,7 @@
         "OptionResultID": "[None, None]",
         "HealthChange": "[0, 10]",
         "AddInventory": "[None, None]",
-        "GameEnd": "[\"You throw another rock at Old Man Herb, and it seems to have defeated him. From inside of his jacket, a bunch of click beetles hop out and pose ready for you to take a picture. You get your hopper photo, upload it to Canvas, and then safely exit Parcel B. YOU WON! Want to try a different path?\", \"Old Man Herb, though weakened by your efforts, is able to fight back, deflecting your punch and delivering his own. Let's just say you didn't make it out alive.. YOU LOST. Would you like to try again?\"]",
+        "GameEnd": "[\"You throw another rock at Old Man Herb, and it seems to have defeated him. From inside of his jacket, a bunch of click beetles hop out and pose ready for you to take a picture. You get your hopper photo, upload it to Canvas, and then safely exit Parcel B. YOU WON! Now try a different path.\", \"Old Man Herb, though weakened by your efforts, is able to fight back, deflecting your punch and delivering his own. Let's just say you didn't make it out alive. Try again.\"]",
         "ItemCheck": "[None, None]"
     }
 ]
