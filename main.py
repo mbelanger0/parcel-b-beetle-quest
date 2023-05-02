@@ -1,13 +1,12 @@
 """
-Bring together model, view, and controller to implement Parcel B Beetle Quest. 
+Bring together model, view, and controller to implement Parcel B Beetle Quest.
 """
 import sys
+from ast import literal_eval
 import pygame
-from pygame.locals import *
 from character import PlayerCharacter
 import scene
 import controller
-from ast import literal_eval
 
 
 pygame.init()
@@ -18,8 +17,10 @@ HEIGHT = 500
 WIDTH = 800
 FPS = 60
 
-# Define constant filepaths in relation to project directory
+# Define player character & related constants
 PLAYER_SPRITE_FILEPATH = "data/sprite_data/resting.png"
+DEFAULT_PLAYER_HEALTH = 10
+player = PlayerCharacter(PLAYER_SPRITE_FILEPATH, DEFAULT_PLAYER_HEALTH)
 
 # Setup pygame clock
 FramePerSec = pygame.time.Clock()
@@ -27,9 +28,6 @@ FramePerSec = pygame.time.Clock()
 # Define surface to draw on and sprites
 displaysurface = pygame.display.set_mode((WIDTH, HEIGHT))
 displaysurface.fill((0, 0, 0))
-player = PlayerCharacter(PLAYER_SPRITE_FILEPATH)
-# player.update_inventory("coat")
-# player.update_inventory("shtuff")
 
 # Define map and scene objects to draw
 #
@@ -44,15 +42,13 @@ map_data = map_scene.scene_data
 controls = controller.TextController("data/event_data/events.json")
 
 # Define map starting point
-START_SCENE = 0
-current_map_scene = START_SCENE
+#
+# PYLINT DISABLE: This is not a constant, but needs to be defined outside of the
+# loop so it isn't reset on every iteration, and this makes pylint mad that it's
+# not uppercase, so disabling.
+current_map_scene = 0  # pylint: disable=invalid-name
 
 while True:
-    for event in pygame.event.get():
-        if event.type == QUIT:
-            pygame.quit()
-            sys.exit()
-
     # Check if there is a valid event that occurs at this scene. If so, this
     # event should be drawn first.
     #
@@ -87,7 +83,7 @@ while True:
             # This tuple is structured (str, int), where string is the item
             # being searched for in inventory and the int is the difference
             # in the amount of damage done (such that damage done is decreased)
-            if item_check != None:
+            if item_check is not None:
                 if player.in_inventory(item_check[0]):
                     health_change -= item_check[1]
 
@@ -98,7 +94,7 @@ while True:
                 # message, potentially with a custom death message
                 alive = player.update_health(health_change)
                 if not alive:
-                    if end_message != None:
+                    if end_message is not None:
                         event_scene.draw_death_scene(end_message)
                     else:
                         event_scene.draw_death_scene()
@@ -110,7 +106,7 @@ while True:
                     pygame.quit()
                     sys.exit()
 
-            if health_change == 0 and end_message != None:
+            if health_change == 0 and end_message is not None:
                 event_scene.draw_win_scene(end_message)
                 pygame.display.update()
                 # If the player has died, display the death screen for 10
@@ -122,7 +118,7 @@ while True:
             # If there is a game end message and the player hasn't already died,
             # it is assumed that they won.
 
-            if inventory_change != None:
+            if inventory_change is not None:
                 player.update_inventory(inventory_change)
 
             # Loop will continue with the next result id
@@ -142,4 +138,3 @@ while True:
         )
         current_event = current_map_scene
         print(current_event)
-1

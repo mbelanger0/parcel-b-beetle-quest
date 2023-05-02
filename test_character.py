@@ -3,7 +3,9 @@ Test all elements of the character class, which includes all model state
 information for the game.
 """
 
-from character import PlayerCharacter, DEFAULT_PLAYER_HEALTH
+from character import PlayerCharacter
+
+DEFAULT_PLAYER_HEALTH = 10
 
 
 def test_add_inventory():
@@ -11,7 +13,7 @@ def test_add_inventory():
     Test that items are correctly added to a player's inventory.
     """
     # The sprite path is not used in this test, so it can be set to a null value
-    player = PlayerCharacter("sprite_path")
+    player = PlayerCharacter("sprite_path", DEFAULT_PLAYER_HEALTH)
 
     player.update_inventory("item1")
     player.update_inventory("item2")
@@ -25,7 +27,7 @@ def test_remove_inventory():
     correctly.
     """
     # The sprite path is not used in this test, so it can be set to a null value
-    player = PlayerCharacter("sprite_path")
+    player = PlayerCharacter("sprite_path", DEFAULT_PLAYER_HEALTH)
 
     player.update_inventory("item1")
     player.update_inventory("item2")
@@ -44,7 +46,7 @@ def test_subtract_health():
     """
 
     # The sprite path is not used in this test, so it can be set to a null value
-    player = PlayerCharacter("sprite_path")
+    player = PlayerCharacter("sprite_path", DEFAULT_PLAYER_HEALTH)
 
     # Remove only half of player health
     # The function additionally returns a boolean representing if the player is
@@ -62,7 +64,7 @@ def test_kill_player():
     health).
     """
     # The sprite path is not used in this test, so it can be set to a null value
-    player = PlayerCharacter("sprite_path")
+    player = PlayerCharacter("sprite_path", DEFAULT_PLAYER_HEALTH)
 
     # Remove a number far greater than the initial player health to ensure the
     # player is dead. This should return false to represent the player being
@@ -76,7 +78,7 @@ def test_add_health():
     method a negative number.
     """
     # The sprite path is not used in this test, so it can be set to a null value
-    player = PlayerCharacter("sprite_path")
+    player = PlayerCharacter("sprite_path", DEFAULT_PLAYER_HEALTH)
 
     # Remove only half of player health
     # The function additionally returns a boolean representing if the player is
@@ -94,7 +96,7 @@ def test_item_in_inventory():
     works correctly
     """
     # The sprite path is not used in this test, so it can be set to a null value
-    player = PlayerCharacter("sprite_path")
+    player = PlayerCharacter("sprite_path", DEFAULT_PLAYER_HEALTH)
 
     test_items = ["item1", "item2", "item3"]
 
@@ -114,7 +116,7 @@ def test_inventory_is_string():
     """
 
     # The sprite path is not used in this test, so it can be set to a null value
-    player = PlayerCharacter("sprite_path")
+    player = PlayerCharacter("sprite_path", DEFAULT_PLAYER_HEALTH)
 
     test_items = ["item1", "item2", 123123, [12312, 123123]]
 

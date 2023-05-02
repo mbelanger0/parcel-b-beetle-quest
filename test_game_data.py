@@ -4,13 +4,18 @@ reference other events that don't exist.
 
 IMPORTANT_NOTE: these tests are mostly checking that we have correctly input and
 formatted all of our data, rather than testing our actual implementation of the
-code. 
-"""
+code.
 
-from scene import MAP_SCENES_FILEPATH, EVENT_SCENES_FILEPATH
+NOTE ON PYLINT: Multiple pylint disable pointless-statements are used
+throughout this file. This is since many checks are simply preforming whether
+a given dictionary access results in an KeyError - the actual value isn't
+being test and is irrelevant, it is just the fact that the key exists that is
+being checked.
+"""
 from json import load
 from ast import literal_eval
 import pytest
+from scene import MAP_SCENES_FILEPATH, EVENT_SCENES_FILEPATH
 
 
 def test_map_event_references():
@@ -32,7 +37,7 @@ def test_map_event_references():
         if event_id != -100:
             # If there isn't an event that corresponds to the ID that the map
             # is supposed to invoke, this will result in a KeyError
-            event_data[event_id]
+            event_data[event_id]  # pylint: disable=pointless-statement
 
 
 def test_map_direction_references():
@@ -56,7 +61,7 @@ def test_map_direction_references():
             if direction is not None:
                 # If the map scene is trying to call another scene that doesn't
                 # exist, this will result in a key error.
-                map_data[direction]
+                map_data[direction]  # pylint: disable=pointless-statement
 
 
 def test_next_event_references():
@@ -81,18 +86,21 @@ def test_next_event_references():
             # back to the main map.
             if next_event == -100:
                 with pytest.raises(IndexError):
-                    event_data[next_event]
+                    event_data[  # pylint: disable=pointless-statement
+                        next_event
+                    ]
             # None is used as a seperate event tree end to signify that the
             # player has either won or lost the game. As such, there should
             # be something in the GameEnd variable to display as a death/win
             # message
-            elif next_event == None:
+            elif next_event is None:
                 with pytest.raises(TypeError):
-                    event_data[next_event]
+                    event_data[  # pylint: disable=pointless-statement
+                        next_event
+                    ]
                 assert literal_eval(event["GameEnd"])[index] is not None
 
             else:
                 # If the value isn't None (meaning it should continue on to
                 # another event), this statement should execute without error.
-                print(next_event)
-                event_data[next_event]
+                event_data[next_event]  # pylint: disable=pointless-statement

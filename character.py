@@ -12,41 +12,27 @@ class Character(ABC):
     and the characters in the events
     """
 
-    def __init__(self, sprite_path):
+    def __init__(self, sprite_path, health):
         """
         Determine file path to the sprite image that will represent a character
-        in an event or the player character
-        """
-        self._sprite_path = sprite_path
-
-
-class EventCharacter(Character):
-    """
-    Class to represent the characters in the events that are not the player
-    """
-
-
-DEFAULT_PLAYER_HEALTH = 10
-
-
-class PlayerCharacter(Character):
-    """
-    Class to track the location, health, and inventory state of the player
-    """
-
-    def __init__(self, sprite_path):
-        """
-        Determine file path to image of character sprite and set starting health
-        and inventory conditions
+        and the character health.
 
         Args:
-            sprite: sprite_path: string representing the file path to the image
-            of the player character sprite
+            sprite_path: string filepath to image file
+            health: integer representing default health
         """
-        super().__init__(sprite_path)
         self._sprite_path = sprite_path
-        self._health = DEFAULT_PLAYER_HEALTH
-        self._inventory = []
+        self._health = health
+
+    @property
+    def filepath(self):
+        """
+        Get the sprite image filepath.
+
+        Returns:
+            string representing filepath to sprite image file
+        """
+        return self._sprite_path
 
     @property
     def health(self):
@@ -59,16 +45,32 @@ class PlayerCharacter(Character):
         """
         return self._health
 
-    @property
-    def filepath(self):
+    @abstractmethod
+    def update_health(self, damage):
         """
-        Return file path to image of the player character sprite
+        Abstract method to update player's health based on a given damage value.
 
-        Returns:
-            string representing the file path to the image of
-            the player character sprite
+        Args:
+            damage: integer damage value to be subtracted from health
         """
-        return self._sprite_path
+
+
+class PlayerCharacter(Character):
+    """
+    Class to track the location, health, and inventory state of the player
+    """
+
+    def __init__(self, sprite_path, health):
+        """
+        Set character's sprite image and default health.
+
+        Args:
+            sprite: sprite_path: string representing the file path to the image
+            of the player character sprite
+            health: integer representing default health.
+        """
+        super().__init__(sprite_path, health)
+        self._inventory = []
 
     @property
     def inventory(self):

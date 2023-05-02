@@ -3,11 +3,11 @@ Take keyboard input to control different scenes within the game.
 """
 
 from abc import ABC, abstractmethod
-import pygame
-from pygame.locals import *
 from json import load
 from ast import literal_eval
 import sys
+import pygame
+from pygame.locals import QUIT
 
 
 # Define all possible keys that will be looked for during event sequences. This
@@ -21,14 +21,14 @@ class Controller(ABC):
     """
 
     @abstractmethod
-    def get_next_move(self, options):
+    def get_next_move(self):
         """
         Abstract method used to determine the key that is pressed which
         will be used to determine the next move in the game
         """
 
     @abstractmethod
-    def find_result_event(self, event_id, event_data):
+    def find_result_event(self, event_id):
         """
         Abstract method to determine what event follows an event decision
         """
@@ -41,7 +41,8 @@ class TextController(Controller):
 
     def __init__(self, event_data):
         """
-        Opens the data file of the data for the events that can happen during game play
+        Opens the data file of the data for the events that can happen during
+        game play
 
         args:
             event_data: string representing file path to the event data
@@ -54,7 +55,8 @@ class TextController(Controller):
         Determined what key is pressed down at a moment in the game
 
         returns:
-            pygame key object representing the current key that is being pressed down
+            pygame key object representing the current key that is being pressed
+            down
         """
         while True:
             for event in pygame.event.get():
@@ -77,13 +79,13 @@ class TextController(Controller):
         """
         while True:
             decision = self.get_next_move()
-            if decision == pygame.K_LEFT and next_direction[0] != None:
+            if decision == pygame.K_LEFT and next_direction[0] is not None:
                 return next_direction[0]
-            if decision == pygame.K_RIGHT and next_direction[1] != None:
+            if decision == pygame.K_RIGHT and next_direction[1] is not None:
                 return next_direction[1]
-            if decision == pygame.K_UP and next_direction[2] != None:
+            if decision == pygame.K_UP and next_direction[2] is not None:
                 return next_direction[2]
-            if decision == pygame.K_DOWN and next_direction[3] != None:
+            if decision == pygame.K_DOWN and next_direction[3] is not None:
                 return next_direction[3]
 
     def find_result_event(self, event_id):
