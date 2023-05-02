@@ -115,7 +115,7 @@ while True:
                 pygame.display.update()
                 # If the player has died, display the death screen for 10
                 # seconds, then quit the game
-                pygame.time.wait(10000)
+                pygame.time.wait(6000)
                 pygame.quit()
                 sys.exit()
 
