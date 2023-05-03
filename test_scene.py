@@ -1,12 +1,14 @@
 """
 Unit tests to test the functions in the scene class that don't exclusively
 print to a pygame surface.
+
+NOTE: THESE UNIT TESTS RELY ON BEING ABLE TO CREATE A PYGAME WINDOW
 """
 
-import scene
-import character
 import pygame
 from PIL import Image
+import scene
+import character
 
 
 def test_map_no_offset():

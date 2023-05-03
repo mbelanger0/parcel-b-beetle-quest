@@ -2,7 +2,8 @@
 layout: default
 ---
 
-# View Our VIDEO by clicking on the image:
+# Parcel B: Beetle Quest
+## View an overview and demo video by clicking on the image below!
 [![VIDEO: Parcel B: Beetle Quest](images/map-scene.PNG)](https://www.youtube.com/watch?v=HmeGbPQOlmk)
 
 # Overview
