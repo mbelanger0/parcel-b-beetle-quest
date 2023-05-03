@@ -123,7 +123,6 @@ while True:
 
             # Loop will continue with the next result id
             current_event = new_event_id
-            print(current_event)
             FramePerSec.tick(FPS)
 
     except (KeyError, ValueError, IndexError):
