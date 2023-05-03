@@ -137,4 +137,3 @@ while True:
             literal_eval(map_data[current_map_scene]["DirectionsToMove"])
         )
         current_event = current_map_scene
-        print(current_event)
