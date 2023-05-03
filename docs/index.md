@@ -4,6 +4,8 @@ layout: default
 
 ![](images/map-scene.PNG)
 
+Video Link: https://www.youtube.com/watch?v=HmeGbPQOlmk
+
 # Overview
 
 Parcel B: Beetle Quest is a text-based choose-your-own adventure game themed
