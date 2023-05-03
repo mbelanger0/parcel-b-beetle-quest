@@ -4,7 +4,7 @@ layout: default
 
 ![](images/map-scene.PNG)
 
-Video Link: https://www.youtube.com/watch?v=HmeGbPQOlmk
+[Parcel B: Beetle Quest Video](https://www.youtube.com/watch?v=HmeGbPQOlmk)
 
 # Overview
 
