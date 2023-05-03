@@ -123,7 +123,6 @@ while True:
 
             # Loop will continue with the next result id
             current_event = new_event_id
-            print(current_event)
             FramePerSec.tick(FPS)
 
     except (KeyError, ValueError, IndexError):
@@ -137,4 +136,3 @@ while True:
             literal_eval(map_data[current_map_scene]["DirectionsToMove"])
         )
         current_event = current_map_scene
-        print(current_event)

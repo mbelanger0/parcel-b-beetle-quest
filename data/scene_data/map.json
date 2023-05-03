@@ -1,50 +1,50 @@
 [
     {
         "ID": 0,
-        "MapPointCenterWidth": 1200,
-        "MapPointCenterHeight": 400,
+        "MapPointCenterWidth": 1013,
+        "MapPointCenterHeight": 381,
         "SpecialEvent": 0,
         "DirectionsToMove": "(None, None, 1, None)"
     },
     {
         "ID": 1,
         "MapPointCenterWidth": 895,
-        "MapPointCenterHeight": 620,
+        "MapPointCenterHeight": 492,
         "SpecialEvent": -100,
         "DirectionsToMove": "(None, None, 2, None)"
     },
     {
         "ID": 2,
         "MapPointCenterWidth": 737,
-        "MapPointCenterHeight": 700,
+        "MapPointCenterHeight": 582,
         "SpecialEvent": -100,
         "DirectionsToMove": "(None, 1, 3, 11)"
     },
     {
         "ID": 3,
         "MapPointCenterWidth": 710,
-        "MapPointCenterHeight": 530,
+        "MapPointCenterHeight": 391,
         "SpecialEvent": -100,
         "DirectionsToMove": "(None, None, 4, 2)"
     },
     {
         "ID": 4,
         "MapPointCenterWidth": 600,
-        "MapPointCenterHeight": 540,
+        "MapPointCenterHeight": 403,
         "SpecialEvent": -100,
         "DirectionsToMove": "(None, 3, 5, None)"
     },
     {
         "ID": 5,
         "MapPointCenterWidth": 504,
-        "MapPointCenterHeight": 600,
+        "MapPointCenterHeight": 475,
         "SpecialEvent": -100,
         "DirectionsToMove": "(None, 4, 6, None)"
     },
     {
         "ID": 6,
         "MapPointCenterWidth": 450,
-        "MapPointCenterHeight": 1250,
+        "MapPointCenterHeight": 1099,
         "SpecialEvent": 6,
         "DirectionsToMove": "(None, None, 7, None)"
     },
@@ -58,36 +58,36 @@
     {
         "ID": 8,
         "MapPointCenterWidth": 505,
-        "MapPointCenterHeight": 1660,
+        "MapPointCenterHeight": 1505,
         "SpecialEvent": -100,
         "DirectionsToMove": "(7, None, 9, None)"
     },
     {
         "ID": 9,
         "MapPointCenterWidth": 645,
-        "MapPointCenterHeight": 1600,
+        "MapPointCenterHeight": 1448,
         "SpecialEvent": -100,
         "DirectionsToMove": "(None, None, 10, None)"
     },
     {
         "ID": 10,
         "Name": "Treehouse + Herb",
-        "MapPointCenterWidth": 819,
-        "MapPointCenterHeight": 1479,
+        "MapPointCenterWidth": 810,
+        "MapPointCenterHeight": 1470,
         "SpecialEvent": 12,
         "DirectionsToMove": "(None, None, None, None)"
     },
     {
         "ID": 11,
         "MapPointCenterWidth": 670,
-        "MapPointCenterHeight": 850,
+        "MapPointCenterHeight": 700,
         "SpecialEvent": -100,
         "DirectionsToMove": "(None, 2, 12, None)"
     },
     {
         "ID": 12,
         "MapPointCenterWidth": 603,
-        "MapPointCenterHeight": 1000,
+        "MapPointCenterHeight": 884,
         "SpecialEvent": -100,
         "DirectionsToMove": "(None, None, 6, None)"
     }
