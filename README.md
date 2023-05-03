@@ -1,4 +1,6 @@
 # Parcel B Beetle Quest
+See more information on the [project website](https://olincollege.github.io/parcel-b-beetle-quest)!
+
 A text-based choose-your-own-adventure game themed around a quintessential
 memory for students at Olin College of Engineering: hunting in Parcel B for a
 click beetle.
