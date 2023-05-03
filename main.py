@@ -91,7 +91,7 @@ while True:
             if health_change != 0:
                 # Update health returns a boolean representing if the character
                 # is still alive. If the player has died, display a death
-                # message, potentially with a custom death message
+                # screen, potentially with a custom death message
                 alive = player.update_health(health_change)
                 if not alive:
                     if end_message is not None:
@@ -106,6 +106,8 @@ while True:
                     pygame.quit()
                     sys.exit()
 
+            # If there is a game end message and the player hasn't already died,
+            # it is assumed that they won.
             if health_change == 0 and end_message is not None:
                 event_scene.draw_win_scene(end_message)
                 pygame.display.update()
@@ -115,9 +117,7 @@ while True:
                 pygame.quit()
                 sys.exit()
 
-            # If there is a game end message and the player hasn't already died,
-            # it is assumed that they won.
-
+            # Add/remove items from the inventory
             if inventory_change is not None:
                 player.update_inventory(inventory_change)
 
@@ -126,7 +126,7 @@ while True:
             print(current_event)
             FramePerSec.tick(FPS)
 
-    except (FileNotFoundError, KeyError, ValueError, IndexError):
+    except (KeyError, ValueError, IndexError):
         # If this block is reached, there is no event at the given map point,
         # so the code continues on.
 

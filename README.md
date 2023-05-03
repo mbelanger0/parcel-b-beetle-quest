@@ -1,4 +1,6 @@
 # Parcel B Beetle Quest
+See more information on the [project website](https://olincollege.github.io/parcel-b-beetle-quest)!
+
 A text-based choose-your-own-adventure game themed around a quintessential
 memory for students at Olin College of Engineering: hunting in Parcel B for a
 click beetle.
@@ -12,7 +14,7 @@ a final project for Olin College of Engineering's Software Design Course.
 
 ## Setup Requirements & Usage
 In order to run this game:
-* Clone the repo to your computer
+* Clone the repo to your computer or download the latest GitHub release
 * Install pygame and pillow (the two external libraries this game depends on) by
 running `pip install -r requirements.txt`
 * Run the file `main.py` by typing `python main.py` into a terminal open to the

@@ -36,7 +36,7 @@ class Controller(ABC):
 
 class TextController(Controller):
     """
-    Controls the players interaction with the game.
+    Controls the players interaction with the game using keyboard input.
     """
 
     def __init__(self, event_data):
@@ -52,7 +52,9 @@ class TextController(Controller):
 
     def get_next_move(self):
         """
-        Determined what key is pressed down at a moment in the game
+        Determined what key is pressed down at a moment in the game. Keeps
+        looping until a key is pressed down. Exists if an exit commands occurs
+        during the loop.
 
         returns:
             pygame key object representing the current key that is being pressed
