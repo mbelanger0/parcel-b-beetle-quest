@@ -348,12 +348,14 @@ class MapScene(Scene):
                 make the image fill the entire screen.
         """
 
-        # Calculate where to center the map around the current point
+        # Calculate where to center the map around the current point, given that
+        # the point where the map is printed onto the surface is based on the
+        # top left corner of the image.
         width_difference = 0
         height_difference = 0
 
         map_width_corner = width_center - (GLOBAL_WINDOW_WIDTH / 2)
-        map_height_corner = height_center - (GLOBAL_WINDOW_WIDTH / 2)
+        map_height_corner = height_center - (GLOBAL_WINDOW_HEIGHT / 2)
 
         # Make sure the point is not going to be too close to the edge of the
         # map such that part of the map will get cut off. If too close to edge,
@@ -363,18 +365,28 @@ class MapScene(Scene):
                 map_width_corner + GLOBAL_WINDOW_WIDTH - image_size[0]
             )
             map_width_corner -= width_difference
+        # Check the point is not going to go off the edge in the other direction
+        # (the corner is < zero)
+        elif map_width_corner < 0:
+            width_difference = abs(map_width_corner)
+            map_width_corner = 0
 
         if (map_height_corner + GLOBAL_WINDOW_HEIGHT) > image_size[1]:
+            print(f"map height corner: {map_height_corner}")
             height_difference = (
                 map_height_corner + GLOBAL_WINDOW_HEIGHT - image_size[1]
             )
+            print(f"height difference: {height_difference}")
             map_height_corner -= height_difference
+        elif map_height_corner < 0:
+            height_difference = abs(map_height_corner)
+            map_height_corner = 0
 
         # Actually draw the background
         self._surface.blit(background, (-map_width_corner, -map_height_corner))
 
         # Return the map offsets
-        return (width_difference, height_difference)
+        return (int(width_difference), int(height_difference))
 
     def draw(self, location_id):
         """
