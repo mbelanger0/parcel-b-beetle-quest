@@ -466,6 +466,8 @@ class EventScene(Scene):
         # Load data for current even
         event_scene = self._scene_data[location_id]
 
+        # print background image - if no special background image is present,
+        # draw a black screen
         if event_scene["BackgroundImage"] != "":
             # Load event background image
             event_background = pygame.image.load(event_scene["BackgroundImage"])
