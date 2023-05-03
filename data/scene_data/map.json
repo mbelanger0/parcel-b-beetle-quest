@@ -1,7 +1,6 @@
 [
     {
         "ID": 0,
-        "Name": "None",
         "MapPointCenterWidth": 1200,
         "MapPointCenterHeight": 400,
         "SpecialEvent": 0,
@@ -9,7 +8,6 @@
     },
     {
         "ID": 1,
-        "Name": "None",
         "MapPointCenterWidth": 895,
         "MapPointCenterHeight": 620,
         "SpecialEvent": -100,
@@ -17,7 +15,6 @@
     },
     {
         "ID": 2,
-        "Name": "None",
         "MapPointCenterWidth": 737,
         "MapPointCenterHeight": 700,
         "SpecialEvent": -100,
@@ -25,7 +22,6 @@
     },
     {
         "ID": 3,
-        "Name": "None",
         "MapPointCenterWidth": 710,
         "MapPointCenterHeight": 530,
         "SpecialEvent": -100,
@@ -33,7 +29,6 @@
     },
     {
         "ID": 4,
-        "Name": "None",
         "MapPointCenterWidth": 600,
         "MapPointCenterHeight": 540,
         "SpecialEvent": -100,
@@ -41,7 +36,6 @@
     },
     {
         "ID": 5,
-        "Name": "None",
         "MapPointCenterWidth": 504,
         "MapPointCenterHeight": 600,
         "SpecialEvent": -100,
@@ -49,7 +43,6 @@
     },
     {
         "ID": 6,
-        "Name": "None",
         "MapPointCenterWidth": 450,
         "MapPointCenterHeight": 1250,
         "SpecialEvent": 6,
@@ -57,7 +50,6 @@
     },
     {
         "ID": 7,
-        "Name": "None",
         "MapPointCenterWidth": 416,
         "MapPointCenterHeight": 1469,
         "SpecialEvent": -100,
@@ -65,7 +57,6 @@
     },
     {
         "ID": 8,
-        "Name": "None",
         "MapPointCenterWidth": 505,
         "MapPointCenterHeight": 1660,
         "SpecialEvent": -100,
@@ -73,7 +64,6 @@
     },
     {
         "ID": 9,
-        "Name": "None",
         "MapPointCenterWidth": 645,
         "MapPointCenterHeight": 1600,
         "SpecialEvent": -100,
@@ -89,7 +79,6 @@
     },
     {
         "ID": 11,
-        "Name": "None",
         "MapPointCenterWidth": 670,
         "MapPointCenterHeight": 850,
         "SpecialEvent": -100,
@@ -97,7 +86,6 @@
     },
     {
         "ID": 12,
-        "Name": "None",
         "MapPointCenterWidth": 603,
         "MapPointCenterHeight": 1000,
         "SpecialEvent": -100,

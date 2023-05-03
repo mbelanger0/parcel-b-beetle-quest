@@ -432,6 +432,15 @@ class EventScene(Scene):
     """
 
     def __init__(self, surface, player):
+        """
+        Initiate an event scene to be displayed in the pygame window. Take in
+        info about player and surface so status info like heath and inventory
+        can be displayed
+
+        Args:
+            surface: pygame surface object on which to draw on
+            player: PlayerCharacter object to be drawn on the surface
+        """
         super().__init__(surface, player)
 
         # Load event scene data
@@ -444,6 +453,16 @@ class EventScene(Scene):
         )
 
     def draw(self, location_id):
+        """
+        Display the event of a specific ID to a pygame window.
+
+        Draw all necessary data from an event such as the background,
+        sprites, options that the player can choose.
+
+        Args:
+            location_id: integer representing the ID of a specific
+            event that information will be loaded from
+        """
         # Load data for current even
         event_scene = self._scene_data[location_id]
 
@@ -475,7 +494,7 @@ class EventScene(Scene):
 
         # Check for flashlight in three options case
         if len(options) == 3 and not self._player.in_inventory("Flashlight"):
-            options = options[1 : len(options)]
+            options = options[0 : len(options) - 1]
 
         # Convert all text options into one string and display the corresponding
         # keys to press
