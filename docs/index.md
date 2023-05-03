@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# Parcel B: Beetle Quest
+
 ## View an overview and demo video by clicking on the image below!
 [![VIDEO: Parcel B: Beetle Quest](images/map-scene.PNG)](https://www.youtube.com/watch?v=HmeGbPQOlmk)
 
@@ -54,7 +54,19 @@ More information can be found in the
 
 ![](images/pbbq-1.PNG)
 
-## Project Contributors
+## Project Contributors and Acknowledgements
 Parcel B: Beetle Quest was written by Carter Harris, Mark Belanger, and Elin
 O'Neill as part of the Software Design course at Olin College of Engineering in
 Spring of 2023.
+
+Emery Lauer contributed game art.
+
+This project additionally takes advantage of the 
+[pygame Python library](https://www.pygame.org/wiki/about), which contains all
+the necessary dependencies for creating the game window, displaying text and
+images, and more.
+
+The main font used throughout the game is 
+[DePixel by ingoFonts](https://www.dafont.com/depixel.font).
+
+
